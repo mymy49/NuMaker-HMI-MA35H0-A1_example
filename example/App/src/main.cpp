@@ -19,15 +19,16 @@ Purpose : Generic application start
 *  Function description
 *   Application entry point.
 */
-int main(void) {
-  int i;
+int main(void) 
+{
+	int i;
 
-  for (i = 0; i < 100; i++) {
-    printf("Hello World %d!\n", i);
-  }
-  do {
-    i++;
-  } while (1);
+	for(i = 0; i < 100; i++) 
+	{
+		printf("Hello World %d!\n", i);
+	}
+
+	while (1);
 }
 
 /*************************** End of file ****************************/

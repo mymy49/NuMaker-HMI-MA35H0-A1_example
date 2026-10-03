@@ -61,11 +61,9 @@
       Name="Debug"
       link_linker_script_file="MA35H04F764C.ld"
       link_use_linker_script_file="Yes" />
+    <folder Name="App Source" exclude="" filter="" path="App" recurse="Yes" />
     <folder Name="Setup">
       <file file_name="Setup/sram_placement_one_stack.xml" />
-    </folder>
-    <folder Name="Source">
-      <file file_name="Source/main.c" />
     </folder>
     <folder Name="System">
       <file file_name="System/ARM64_crt0.s" />
