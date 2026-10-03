@@ -1,0 +1,49 @@
+/*********************************************************************
+*
+*       ConfigTargetSettings
+*
+*  Function description
+*    Called before the connection. Can set global DLL variables.
+*/
+void ConfigTargetSettings(void) {
+    // 디버그는 코어(APB-AP, 포트 1)로, 메모리 다운로드는 버스(AHB-AP, 포트 2)로 직접 수행하도록 강제 지정
+    JLINK_ExecCommand("Device = CORTEX-A35");
+    // JLINK_CORESIGHT_IndexAHBAPToUse = 2; 
+    JLINK_CORESIGHT_IndexAPBAPToUse = 1; 
+}
+
+/*********************************************************************
+*
+*       InitTarget
+*
+*  Function description
+*    Called before any connection to the target is performed.
+*/
+void InitTarget(void) {
+    JLINK_SYS_Report("MA35 InitTarget: Starting...");
+}
+
+/*********************************************************************
+*
+*       SetupTarget
+*
+*  Function description
+*    Called right after a connection to the target has been established.
+*/
+void SetupTarget(void) {
+    JLINK_SYS_Report("MA35 SetupTarget: NuWriter already initialized the board.");
+}
+
+/*********************************************************************
+*
+*       ResetTarget
+*
+*  Function description
+*    Custom reset sequence if the default one fails.
+*/
+void ResetTarget(void) {
+    JLINK_SYS_Report("MA35 ResetTarget: SKIPPING RESET to preserve NuWriter initialization!");
+    JLINK_MEM_WriteU32(0xE0C10090, 0x00000001); // DBGDRCR Halt Request
+    // By leaving this empty, we prevent J-Link from resetting the board.
+    // This allows TrustZone and DDR to remain accessible.
+}
