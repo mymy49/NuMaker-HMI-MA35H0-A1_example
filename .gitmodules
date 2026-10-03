@@ -1,0 +1,4 @@
+[submodule "yss"]
+	path = yss
+	url = https://github.com/mymy49/yss
+	branch = Release/2026.09
