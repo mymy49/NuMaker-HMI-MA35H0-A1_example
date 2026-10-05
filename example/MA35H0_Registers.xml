@@ -1,0 +1,1112 @@
+<!DOCTYPE Register_Definition_File>
+<Processor description="MA35H0 Cortex-A35 Registers" name="MA35H0">
+    <RegisterGroup description="Generic Interrupt Controller Distributor (GICD)" name="GICD" start="0x50801000">
+        <Register access="Read/Write" description="Distributor Control Register" name="GICD_CTLR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0">
+            <BitField description="Enable Group 0" name="EnableGrp0" size="1" start="0" />
+            <BitField description="Enable Group 1" name="EnableGrp1" size="1" start="1" />
+        </Register>
+        <Register access="ReadOnly" description="Interrupt Controller Type Register" name="GICD_TYPER" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4" />
+        <Register access="ReadOnly" description="Distributor Implementer Identification Register" name="GICD_IIDR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8" />
+        <Register access="Read/Write" description="Interrupt Group Register 0" name="GICD_IGROUPR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x80" />
+        <Register access="Read/Write" description="Interrupt Group Register 1" name="GICD_IGROUPR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x84" />
+        <Register access="Read/Write" description="Interrupt Group Register 2" name="GICD_IGROUPR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x88" />
+        <Register access="Read/Write" description="Interrupt Group Register 3" name="GICD_IGROUPR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8c" />
+        <Register access="Read/Write" description="Interrupt Group Register 4" name="GICD_IGROUPR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x90" />
+        <Register access="Read/Write" description="Interrupt Group Register 5" name="GICD_IGROUPR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x94" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 0" name="GICD_ISENABLER0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x100" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 1" name="GICD_ISENABLER1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x104" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 2" name="GICD_ISENABLER2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x108" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 3" name="GICD_ISENABLER3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x10c" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 4" name="GICD_ISENABLER4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x110" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 5" name="GICD_ISENABLER5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x114" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 0" name="GICD_ICENABLER0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x180" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 1" name="GICD_ICENABLER1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x184" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 2" name="GICD_ICENABLER2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x188" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 3" name="GICD_ICENABLER3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x18c" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 4" name="GICD_ICENABLER4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x190" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 5" name="GICD_ICENABLER5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x194" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 0" name="GICD_ISPENDR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x200" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 1" name="GICD_ISPENDR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x204" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 2" name="GICD_ISPENDR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x208" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 3" name="GICD_ISPENDR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x20c" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 4" name="GICD_ISPENDR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x210" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 5" name="GICD_ISPENDR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x214" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 0" name="GICD_ICPENDR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x280" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 1" name="GICD_ICPENDR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x284" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 2" name="GICD_ICPENDR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x288" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 3" name="GICD_ICPENDR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x28c" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 4" name="GICD_ICPENDR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x290" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 5" name="GICD_ICPENDR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x294" />
+        <Register access="Read/Write" description="Interrupt Priority Register 0" name="GICD_IPRIORITYR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x400" />
+        <Register access="Read/Write" description="Interrupt Priority Register 1" name="GICD_IPRIORITYR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x404" />
+        <Register access="Read/Write" description="Interrupt Priority Register 2" name="GICD_IPRIORITYR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x408" />
+        <Register access="Read/Write" description="Interrupt Priority Register 3" name="GICD_IPRIORITYR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x40c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 4" name="GICD_IPRIORITYR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x410" />
+        <Register access="Read/Write" description="Interrupt Priority Register 5" name="GICD_IPRIORITYR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x414" />
+        <Register access="Read/Write" description="Interrupt Priority Register 6" name="GICD_IPRIORITYR6" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x418" />
+        <Register access="Read/Write" description="Interrupt Priority Register 7" name="GICD_IPRIORITYR7" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x41c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 8" name="GICD_IPRIORITYR8" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x420" />
+        <Register access="Read/Write" description="Interrupt Priority Register 9" name="GICD_IPRIORITYR9" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x424" />
+        <Register access="Read/Write" description="Interrupt Priority Register 10" name="GICD_IPRIORITYR10" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x428" />
+        <Register access="Read/Write" description="Interrupt Priority Register 11" name="GICD_IPRIORITYR11" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x42c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 12" name="GICD_IPRIORITYR12" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x430" />
+        <Register access="Read/Write" description="Interrupt Priority Register 13" name="GICD_IPRIORITYR13" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x434" />
+        <Register access="Read/Write" description="Interrupt Priority Register 14" name="GICD_IPRIORITYR14" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x438" />
+        <Register access="Read/Write" description="Interrupt Priority Register 15" name="GICD_IPRIORITYR15" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x43c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 16" name="GICD_IPRIORITYR16" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x440" />
+        <Register access="Read/Write" description="Interrupt Priority Register 17" name="GICD_IPRIORITYR17" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x444" />
+        <Register access="Read/Write" description="Interrupt Priority Register 18" name="GICD_IPRIORITYR18" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x448" />
+        <Register access="Read/Write" description="Interrupt Priority Register 19" name="GICD_IPRIORITYR19" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x44c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 20" name="GICD_IPRIORITYR20" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x450" />
+        <Register access="Read/Write" description="Interrupt Priority Register 21" name="GICD_IPRIORITYR21" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x454" />
+        <Register access="Read/Write" description="Interrupt Priority Register 22" name="GICD_IPRIORITYR22" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x458" />
+        <Register access="Read/Write" description="Interrupt Priority Register 23" name="GICD_IPRIORITYR23" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x45c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 24" name="GICD_IPRIORITYR24" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x460" />
+        <Register access="Read/Write" description="Interrupt Priority Register 25" name="GICD_IPRIORITYR25" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x464" />
+        <Register access="Read/Write" description="Interrupt Priority Register 26" name="GICD_IPRIORITYR26" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x468" />
+        <Register access="Read/Write" description="Interrupt Priority Register 27" name="GICD_IPRIORITYR27" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x46c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 28" name="GICD_IPRIORITYR28" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x470" />
+        <Register access="Read/Write" description="Interrupt Priority Register 29" name="GICD_IPRIORITYR29" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x474" />
+        <Register access="Read/Write" description="Interrupt Priority Register 30" name="GICD_IPRIORITYR30" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x478" />
+        <Register access="Read/Write" description="Interrupt Priority Register 31" name="GICD_IPRIORITYR31" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x47c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 32" name="GICD_IPRIORITYR32" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x480" />
+        <Register access="Read/Write" description="Interrupt Priority Register 33" name="GICD_IPRIORITYR33" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x484" />
+        <Register access="Read/Write" description="Interrupt Priority Register 34" name="GICD_IPRIORITYR34" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x488" />
+        <Register access="Read/Write" description="Interrupt Priority Register 35" name="GICD_IPRIORITYR35" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x48c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 36" name="GICD_IPRIORITYR36" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x490" />
+        <Register access="Read/Write" description="Interrupt Priority Register 37" name="GICD_IPRIORITYR37" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x494" />
+        <Register access="Read/Write" description="Interrupt Priority Register 38" name="GICD_IPRIORITYR38" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x498" />
+        <Register access="Read/Write" description="Interrupt Priority Register 39" name="GICD_IPRIORITYR39" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x49c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 40" name="GICD_IPRIORITYR40" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4a0" />
+        <Register access="Read/Write" description="Interrupt Priority Register 41" name="GICD_IPRIORITYR41" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4a4" />
+        <Register access="Read/Write" description="Interrupt Priority Register 42" name="GICD_IPRIORITYR42" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4a8" />
+        <Register access="Read/Write" description="Interrupt Priority Register 43" name="GICD_IPRIORITYR43" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4ac" />
+        <Register access="Read/Write" description="Interrupt Priority Register 44" name="GICD_IPRIORITYR44" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4b0" />
+        <Register access="Read/Write" description="Interrupt Priority Register 45" name="GICD_IPRIORITYR45" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4b4" />
+        <Register access="Read/Write" description="Interrupt Priority Register 46" name="GICD_IPRIORITYR46" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4b8" />
+        <Register access="Read/Write" description="Interrupt Priority Register 47" name="GICD_IPRIORITYR47" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4bc" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 0" name="GICD_ITARGETSR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x800" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 1" name="GICD_ITARGETSR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x804" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 2" name="GICD_ITARGETSR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x808" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 3" name="GICD_ITARGETSR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x80c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 4" name="GICD_ITARGETSR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x810" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 5" name="GICD_ITARGETSR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x814" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 6" name="GICD_ITARGETSR6" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x818" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 7" name="GICD_ITARGETSR7" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x81c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 8" name="GICD_ITARGETSR8" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x820" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 9" name="GICD_ITARGETSR9" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x824" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 10" name="GICD_ITARGETSR10" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x828" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 11" name="GICD_ITARGETSR11" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x82c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 12" name="GICD_ITARGETSR12" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x830" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 13" name="GICD_ITARGETSR13" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x834" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 14" name="GICD_ITARGETSR14" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x838" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 15" name="GICD_ITARGETSR15" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x83c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 16" name="GICD_ITARGETSR16" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x840" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 17" name="GICD_ITARGETSR17" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x844" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 18" name="GICD_ITARGETSR18" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x848" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 19" name="GICD_ITARGETSR19" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x84c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 20" name="GICD_ITARGETSR20" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x850" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 21" name="GICD_ITARGETSR21" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x854" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 22" name="GICD_ITARGETSR22" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x858" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 23" name="GICD_ITARGETSR23" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x85c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 24" name="GICD_ITARGETSR24" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x860" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 25" name="GICD_ITARGETSR25" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x864" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 26" name="GICD_ITARGETSR26" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x868" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 27" name="GICD_ITARGETSR27" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x86c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 28" name="GICD_ITARGETSR28" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x870" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 29" name="GICD_ITARGETSR29" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x874" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 30" name="GICD_ITARGETSR30" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x878" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 31" name="GICD_ITARGETSR31" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x87c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 32" name="GICD_ITARGETSR32" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x880" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 33" name="GICD_ITARGETSR33" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x884" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 34" name="GICD_ITARGETSR34" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x888" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 35" name="GICD_ITARGETSR35" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x88c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 36" name="GICD_ITARGETSR36" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x890" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 37" name="GICD_ITARGETSR37" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x894" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 38" name="GICD_ITARGETSR38" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x898" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 39" name="GICD_ITARGETSR39" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x89c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 40" name="GICD_ITARGETSR40" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8a0" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 41" name="GICD_ITARGETSR41" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8a4" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 42" name="GICD_ITARGETSR42" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8a8" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 43" name="GICD_ITARGETSR43" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8ac" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 44" name="GICD_ITARGETSR44" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8b0" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 45" name="GICD_ITARGETSR45" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8b4" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 46" name="GICD_ITARGETSR46" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8b8" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 47" name="GICD_ITARGETSR47" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8bc" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 0" name="GICD_ICFGR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc00" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 1" name="GICD_ICFGR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc04" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 2" name="GICD_ICFGR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc08" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 3" name="GICD_ICFGR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc0c" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 4" name="GICD_ICFGR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc10" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 5" name="GICD_ICFGR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc14" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 6" name="GICD_ICFGR6" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc18" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 7" name="GICD_ICFGR7" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc1c" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 8" name="GICD_ICFGR8" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc20" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 9" name="GICD_ICFGR9" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc24" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 10" name="GICD_ICFGR10" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc28" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 11" name="GICD_ICFGR11" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc2c" />
+        <Register access="WriteOnly" description="Software Generated Interrupt Register" name="GICD_SGIR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xF00" />
+    </RegisterGroup>
+    <RegisterGroup description="Generic Interrupt Controller CPU Interface (GICC)" name="GICC" start="0x50802000">
+        <Register access="Read/Write" description="CPU Interface Control Register" name="GICC_CTLR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0">
+            <BitField description="Enable Group 0" name="EnableGrp0" size="1" start="0" />
+            <BitField description="Enable Group 1" name="EnableGrp1" size="1" start="1" />
+            <BitField description="AckCtl" name="AckCtl" size="1" start="2" />
+            <BitField description="FIQEn" name="FIQEn" size="1" start="3" />
+            <BitField description="CBPR" name="CBPR" size="1" start="4" />
+            <BitField description="FIQ bypass disable" name="FIQBypDisGrp0" size="1" start="5" />
+            <BitField description="IRQ bypass disable" name="IRQBypDisGrp0" size="1" start="6" />
+        </Register>
+        <Register access="Read/Write" description="Interrupt Priority Mask Register" name="GICC_PMR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4" />
+        <Register access="Read/Write" description="Binary Point Register" name="GICC_BPR" reset_mask="0xFFFFFFFF" reset_value="0x00000002" size="4" start="+0x8" />
+        <Register access="ReadOnly" description="Interrupt Acknowledge Register" name="GICC_IAR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xC">
+            <BitField description="Interrupt ID" name="InterruptID" size="10" start="0" />
+            <BitField description="CPUID" name="CPUID" size="3" start="10" />
+        </Register>
+        <Register access="WriteOnly" description="End of Interrupt Register" name="GICC_EOIR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x10">
+            <BitField description="Interrupt ID" name="InterruptID" size="10" start="0" />
+            <BitField description="CPUID" name="CPUID" size="3" start="10" />
+        </Register>
+        <Register access="ReadOnly" description="Running Priority Register" name="GICC_RPR" reset_mask="0xFFFFFFFF" reset_value="0x000000FF" size="4" start="+0x14" />
+        <Register access="ReadOnly" description="Highest Priority Pending Interrupt Register" name="GICC_HPPIR" reset_mask="0xFFFFFFFF" reset_value="0x000003FF" size="4" start="+0x18" />
+        <Register access="Read/Write" description="Aliased Binary Point Register" name="GICC_ABPR" reset_mask="0xFFFFFFFF" reset_value="0x00000003" size="4" start="+0x1C" />
+        <Register access="ReadOnly" description="Aliased Interrupt Acknowledge Register" name="GICC_AIAR" reset_mask="0xFFFFFFFF" reset_value="0x000003FF" size="4" start="+0x20" />
+        <Register access="WriteOnly" description="Aliased End of Interrupt Register" name="GICC_AEOIR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x24" />
+        <Register access="ReadOnly" description="Aliased Highest Priority Pending Interrupt Register" name="GICC_AHPPIR" reset_mask="0xFFFFFFFF" reset_value="0x000003FF" size="4" start="+0x28" />
+        <Register access="ReadOnly" description="CPU Interface Identification Register" name="GICC_IIDR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xFC" />
+        <Register access="WriteOnly" description="Deactivate Interrupt Register" name="GICC_DIR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x1000" />
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 0" name="TIMER0" start="0x40500000">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 1" name="TIMER1" start="0x40500100">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 2" name="TIMER2" start="0x40510000">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 3" name="TIMER3" start="0x40510100">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 4" name="TIMER4" start="0x40520000">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 5" name="TIMER5" start="0x40520100">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 6" name="TIMER6" start="0x40530000">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 7" name="TIMER7" start="0x40530100">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 8" name="TIMER8" start="0x40540000">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 9" name="TIMER9" start="0x40540100">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 10" name="TIMER10" start="0x40550000">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Timer Controller 11" name="TIMER11" start="0x40550100">
+        <Register access="Read/Write" description="Timer Control Register" name="CTL" reset_mask="0xFFFFFFFF" reset_value="0x00000005" size="4" start="+0x0000">
+            <BitField name="PSC" start="0" size="8" description="Prescale Counter" />
+            <BitField name="INTRGEN" start="19" size="1" description="Inter-timer Trigger Mode Enable Bit" />
+            <BitField name="PERIOSEL" start="20" size="1" description="Periodic Mode Behavior Selection Enable Bit" />
+            <BitField name="TGLPINSEL" start="21" size="1" description="Toggle-output Pin Select" />
+            <BitField name="CAPSRC" start="22" size="1" description="Capture Pin Source Selection" />
+            <BitField name="WKEN" start="23" size="1" description="Wake-up Function Enable Bit" />
+            <BitField name="EXTCNTEN" start="24" size="1" description="Event Counter Mode Enable Bit" />
+            <BitField name="ACTSTS" start="25" size="1" description="Timer Active Status Bit (Read Only)" />
+            <BitField name="OPMODE" start="27" size="2" description="Timer Counting Mode Select" />
+            <BitField name="INTEN" start="29" size="1" description="Timer Interrupt Enable Bit" />
+            <BitField name="CNTEN" start="30" size="1" description="Timer Counting Enable Bit" />
+            <BitField name="ICEDEBUG" start="31" size="1" description="ICE Debug Mode Acknowledge Disable Bit (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Timer Comparator Register" name="CMP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="CMPDAT" start="0" size="24" description="Timer Comparator Value" />
+        </Register>
+        <Register access="Read/Write" description="Timer Interrupt Status Register" name="INTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="TIF" start="0" size="1" description="Timer Interrupt Flag" />
+            <BitField name="TWKF" start="1" size="1" description="Timer Wake-up Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Data Register" name="CNT" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="CNT" start="0" size="24" description="Timer Data Register" />
+            <BitField name="RSTACT" start="31" size="1" description="Timer Data Register Reset Active (Read Only)" />
+        </Register>
+        <Register access="ReadOnly" description="Timer Capture Data Register" name="CAP" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="CAPDAT" start="0" size="24" description="Timer Capture Data Register" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Control Register" name="EXTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="CNTPHASE" start="0" size="1" description="Timer External Count Phase" />
+            <BitField name="CAPEN" start="3" size="1" description="Timer External Capture Pin Enable Bit" />
+            <BitField name="CAPFUNCS" start="4" size="1" description="Capture Function Selection" />
+            <BitField name="CAPIEN" start="5" size="1" description="Timer External Capture Interrupt Enable Bit" />
+            <BitField name="CAPDBEN" start="6" size="1" description="Timer External Capture Pin De-bounce Enable Bit" />
+            <BitField name="CNTDBEN" start="7" size="1" description="Timer Counter Pin De-bounce Enable Bit" />
+            <BitField name="ICAPSSEL" start="8" size="3" description="Internal Capture Source Selection" />
+            <BitField name="CAPEDGE" start="12" size="3" description="Timer External Capture Pin Edge Detect" />
+            <BitField name="ECNTSSEL" start="16" size="1" description="Event Counter Source Selection to Trigger Event Counter Function" />
+            <BitField name="CAPSDIV" start="28" size="4" description="Timer Capture Source Divider" />
+        </Register>
+        <Register access="Read/Write" description="Timer External Interrupt Status Register" name="EINTSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CAPIF" start="0" size="1" description="Timer External Capture Interrupt Flag" />
+        </Register>
+        <Register access="Read/Write" description="Timer Trigger Control Register" name="TRGCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TRGSSEL" start="0" size="1" description="Trigger Source Select Bit" />
+            <BitField name="TRGPWM" start="1" size="1" description="Trigger EPWM and BPWM Enable Bit" />
+            <BitField name="TRGPDMA" start="4" size="1" description="Trigger PDMA Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Timer Alternative Control Register" name="ALTCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="FUNCSEL" start="0" size="1" description="Function Selection" />
+        </Register>
+    </RegisterGroup>
+    <RegisterGroup description="Clock Controller" name="CLK" start="0x40460200">
+        <Register access="Read/Write" description="System Power-down Control Register" name="PWRCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0000">
+            <BitField name="HXTEN" start="0" size="1" description="HXT Enable Bit (Write Protect)" />
+            <BitField name="LXTEN" start="1" size="1" description="LXT Enable Bit (Write Protect)" />
+            <BitField name="HIRCEN" start="2" size="1" description="HIRC Enable Bit (Write Protect)" />
+            <BitField name="LIRCEN" start="3" size="1" description="LIRC Enable Bit (Write Protect)" />
+            <BitField name="HXTDS" start="10" size="1" description="HXT Drive Current Strength (Write Protect)" />
+            <BitField name="SYSPLLAPD" start="11" size="1" description="SYSPLL Auto Power Down Option when CA35 &amp; RTP-M4 are Power Down (Write Protect)" />
+            <BitField name="CAPLLAPD" start="12" size="1" description="CAPLL Auto Power Down Option when CA35 is Power Gating (Write Protect)" />
+            <BitField name="DDRPLLAPD" start="13" size="1" description="DDRPLL Auto Power Down Option when CA35 is Power Gating (Write Protect)" />
+            <BitField name="HXTAOFF" start="14" size="1" description="HXT Auto Off Option when CA35 is Power Gating (Write Protect)" />
+            <BitField name="HIRCAOFF" start="15" size="1" description="HIRC Auto Off Option when CA35 is Power Gating (Write Protect)" />
+            <BitField name="LXTSTBS" start="16" size="2" description="LXT Stable Count Select (Write Protect)" />
+            <BitField name="GICAOFF" start="21" size="1" description="GIC CLK Auto Off Option when CA35 is Power Gating (Write Protect)" />
+            <BitField name="HXTAPD" start="22" size="1" description="HXT Auto Off Option when CA35 is Power Down (Write Protect)" />
+            <BitField name="HIRCAPD" start="23" size="1" description="HIRC Auto Off Option when CA35 is Power Down (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="AXI and AHB Device Clock Enable Control Register 0" name="SYSCLK0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0004">
+            <BitField name="RTPEN" start="1" size="1" description="CPU RTP CortexM4 AHB Clock Enable Bit (Write Protect)" />
+            <BitField name="TAHBCKEN" start="2" size="1" description="TSI AHB HCLK Clock Enable Bit (Write Protect)" />
+            <BitField name="LVRDBEN" start="3" size="1" description="LVR Debounce Clock Enable Bit (Write Protect)" />
+            <BitField name="DDR0CKEN" start="4" size="1" description="DDR Port0 Clock Enable Bit (Write Protect)" />
+            <BitField name="DDR6CKEN" start="5" size="1" description="DDR Port6 Clock Enable Bit (Write Protect)" />
+            <BitField name="CANFD0CKEN" start="8" size="1" description="CANFD0 Clock Enable Bit" />
+            <BitField name="CANFD1CKEN" start="9" size="1" description="CANFD1 Clock Enable Bit" />
+            <BitField name="CANFD2CKEN" start="10" size="1" description="CANFD2 Clock Enable Bit" />
+            <BitField name="CANFD3CKEN" start="11" size="1" description="CANFD3 Clock Enable Bit" />
+            <BitField name="SDH0EN" start="16" size="1" description="SD0 Host Controller AHB clock Enable Bit" />
+            <BitField name="SDH1EN" start="17" size="1" description="SD1 Host Controller AHB clock Enable Bit" />
+            <BitField name="NANDEN" start="18" size="1" description="NAND Controller Clock Enable Bit" />
+            <BitField name="USBDEN" start="19" size="1" description="USBD Clock Enable Bit" />
+            <BitField name="USBHEN" start="20" size="1" description="USBH Clock Enable Bit (TZNS)" />
+            <BitField name="HUSBH0EN" start="21" size="1" description="High Speed USBH Clock Enable Bit (TZNS)" />
+            <BitField name="HUSBH1EN" start="22" size="1" description="High Speed USBH Clock Enable Bit (TZNS)" />
+            <BitField name="GFXEN" start="24" size="1" description="GFX Clock Enable Bit (TZNS)" />
+            <BitField name="VDECEN" start="25" size="1" description="VC8000 Clock Enable Bit (TZNS)" />
+            <BitField name="DCUEN" start="26" size="1" description="DC Ultra Clock Enable Bit (TZNS)" />
+            <BitField name="EMAC0EN" start="27" size="1" description="Ethernet MAC 0 AXI Clock Enable Bit (TZNS)" />
+            <BitField name="EMAC1EN" start="28" size="1" description="Ethernet MAC 1 AXI Clock Enable Bit (TZNS)" />
+        </Register>
+        <Register access="Read/Write" description="AXI and AHB Device Clock Enable Control Register 1" name="SYSCLK1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0008">
+            <BitField name="PDMA0EN" start="0" size="1" description="PDMA0 Controller Clock Enable Bit" />
+            <BitField name="PDMA1EN" start="1" size="1" description="PDMA1 Controller Clock Enable Bit" />
+            <BitField name="PDMA2EN" start="2" size="1" description="PDMA2 Controller Clock Enable Bit" />
+            <BitField name="PDMA3EN" start="3" size="1" description="PDMA3 Controller Clock Enable Bit" />
+            <BitField name="WH0CKEN" start="4" size="1" description="Wormhole 0 Peripheral Clock Enable Bit (Write Protect, TZNS)" />
+            <BitField name="WH1CKEN" start="5" size="1" description="Wormhole 1 Peripheral Clock Enable Bit (Write Protect)" />
+            <BitField name="HWSCKEN" start="6" size="1" description="Hardware Semaphore Clock Enable Bit (Write Protect, TZNS)" />
+            <BitField name="EBICKEN" start="7" size="1" description="EBI Controller Clock Enable Bit" />
+            <BitField name="SRAM0CKEN" start="8" size="1" description="SRAM Bank0 Controller Clock Enable Bit (Write Protect)" />
+            <BitField name="SRAM1CKEN" start="9" size="1" description="SRAM Bank1 Controller Clock Enable Bit (Write Protect)" />
+            <BitField name="ROMCKEN" start="10" size="1" description="ROM AHB Clock Enable Bit (Write Protect)" />
+            <BitField name="TRACKEN" start="11" size="1" description="Coresight Trace Clock Enable Bit (Write Protect)" />
+            <BitField name="DBGCKEN" start="12" size="1" description="Coresight Debug Clock Enable Bit (Write Protect)" />
+            <BitField name="CLKOCKEN" start="13" size="1" description="CLKO Clock Enable Bit (Write Protect)" />
+            <BitField name="GTMRCKEN" start="14" size="1" description="Cortex A35 Generic Timer Clock Enable Bit (Write Protect)" />
+            <BitField name="GPACKEN" start="16" size="1" description="GPIOA AHB Clock Enable Bit" />
+            <BitField name="GPBCKEN" start="17" size="1" description="GPIOB AHB Clock Enable Bit" />
+            <BitField name="GPCCKEN" start="18" size="1" description="GPIOC AHB Clock Enable Bit" />
+            <BitField name="GPDCKEN" start="19" size="1" description="GPIOD AHB Clock Enable Bit" />
+            <BitField name="GPECKEN" start="20" size="1" description="GPIOE AHB Clock Enable Bit" />
+            <BitField name="GPFCKEN" start="21" size="1" description="GPIOF AHB Clock Enable Bit" />
+            <BitField name="GPGCKEN" start="22" size="1" description="GPIOG AHB Clock Enable Bit" />
+            <BitField name="GPHCKEN" start="23" size="1" description="GPIOH AHB Clock Enable Bit" />
+            <BitField name="GPICKEN" start="24" size="1" description="GPIOI AHB Clock Enable Bit" />
+            <BitField name="GPJCKEN" start="25" size="1" description="GPIOJ AHB Clock Enable Bit" />
+            <BitField name="GPKCKEN" start="26" size="1" description="GPIOK AHB Clock Enable Bit" />
+            <BitField name="GPLCKEN" start="27" size="1" description="GPIOL AHB Clock Enable Bit" />
+            <BitField name="GPMCKEN" start="28" size="1" description="GPIOM AHB Clock Enable Bit" />
+            <BitField name="GPNCKEN" start="29" size="1" description="GPION AHB Clock Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="APB Devices Clock Enable Control Register 0" name="APBCLK0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x000C">
+            <BitField name="TMR0CKEN" start="0" size="1" description="Timer0 Clock Enable Bit" />
+            <BitField name="TMR1CKEN" start="1" size="1" description="Timer1 Clock Enable Bit" />
+            <BitField name="TMR2CKEN" start="2" size="1" description="Timer2 Clock Enable Bit" />
+            <BitField name="TMR3CKEN" start="3" size="1" description="Timer3 Clock Enable Bit" />
+            <BitField name="TMR4CKEN" start="4" size="1" description="Timer4 Clock Enable Bit" />
+            <BitField name="TMR5CKEN" start="5" size="1" description="Timer5 Clock Enable Bit" />
+            <BitField name="TMR6CKEN" start="6" size="1" description="Timer6 Clock Enable Bit" />
+            <BitField name="TMR7CKEN" start="7" size="1" description="Timer7 Clock Enable Bit" />
+            <BitField name="TMR8CKEN" start="8" size="1" description="Timer8 Clock Enable Bit" />
+            <BitField name="TMR9CKEN" start="9" size="1" description="Timer9 Clock Enable Bit" />
+            <BitField name="TMR10CKEN" start="10" size="1" description="Timer10 Clock Enable Bit" />
+            <BitField name="TMR11CKEN" start="11" size="1" description="Timer11 Clock Enable Bit" />
+            <BitField name="UART0CKEN" start="12" size="1" description="UART0 Clock Enable Bit" />
+            <BitField name="UART1CKEN" start="13" size="1" description="UART1 Clock Enable Bit" />
+            <BitField name="UART2CKEN" start="14" size="1" description="UART2 Clock Enable Bit" />
+            <BitField name="UART3CKEN" start="15" size="1" description="UART3 Clock Enable Bit" />
+            <BitField name="UART4CKEN" start="16" size="1" description="UART4 Clock Enable Bit" />
+            <BitField name="UART5CKEN" start="17" size="1" description="UART5 Clock Enable Bit" />
+            <BitField name="UART6CKEN" start="18" size="1" description="UART6 Clock Enable Bit" />
+            <BitField name="UART7CKEN" start="19" size="1" description="UART7 Clock Enable Bit" />
+            <BitField name="UART8CKEN" start="20" size="1" description="UART8 Clock Enable Bit" />
+            <BitField name="UART9CKEN" start="21" size="1" description="UART9 Clock Enable Bit" />
+            <BitField name="UART10CKEN" start="22" size="1" description="UART10 Clock Enable Bit" />
+            <BitField name="UART11CKEN" start="23" size="1" description="UART11 Clock Enable Bit" />
+            <BitField name="UART12CKEN" start="24" size="1" description="UART12 Clock Enable Bit" />
+            <BitField name="UART13CKEN" start="25" size="1" description="UART13 Clock Enable Bit" />
+            <BitField name="UART14CKEN" start="26" size="1" description="UART14 Clock Enable Bit" />
+            <BitField name="UART15CKEN" start="27" size="1" description="UART15 Clock Enable Bit" />
+            <BitField name="UART16CKEN" start="28" size="1" description="UART16 Clock Enable Bit" />
+            <BitField name="RTCCKEN" start="29" size="1" description="RTC Clock Enable Bit (Shared)" />
+            <BitField name="DDRPCKEN" start="30" size="1" description="DDR PHY Utility Block Clock Enable Bit" />
+            <BitField name="KPICKEN" start="31" size="1" description="Keypad Interface Clock Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="APB Devices Clock Enable Control Register 1" name="APBCLK1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0010">
+            <BitField name="I2C0CKEN" start="0" size="1" description="I2C0 Clock Enable Bit" />
+            <BitField name="I2C1CKEN" start="1" size="1" description="I2C1 Clock Enable Bit" />
+            <BitField name="I2C2CKEN" start="2" size="1" description="I2C2 Clock Enable Bit" />
+            <BitField name="I2C3CKEN" start="3" size="1" description="I2C3 Clock Enable Bit" />
+            <BitField name="I2C4CKEN" start="4" size="1" description="I2C4 Clock Enable Bit" />
+            <BitField name="I2C5CKEN" start="5" size="1" description="I2C5 Clock Enable Bit" />
+            <BitField name="QSPI0CKEN" start="6" size="1" description="QSPI0 Clock Enable Bit" />
+            <BitField name="QSPI1CKEN" start="7" size="1" description="QSPI1 Clock Enable Bit" />
+            <BitField name="SC0CKEN" start="12" size="1" description="SC0 Clock Enable Bit" />
+            <BitField name="SC1CKEN" start="13" size="1" description="SC1 Clock Enable Bit" />
+            <BitField name="WDT0CKEN" start="16" size="1" description="Watchdog Timer 0 Clock Enable Bit (Write Protect)" />
+            <BitField name="WDT1CKEN" start="17" size="1" description="Watchdog Timer 1 Clock Enable Bit (Write Protect)" />
+            <BitField name="WDT2CKEN" start="18" size="1" description="Watchdog Timer 2 Clock Enable Bit (Write Protect, SUBM)" />
+            <BitField name="EPWM0CKEN" start="24" size="1" description="EPWM0 Clock Enable Bit" />
+            <BitField name="EPWM1CKEN" start="25" size="1" description="EPWM1 Clock Enable Bit" />
+            <BitField name="EPWM2CKEN" start="26" size="1" description="EPWM2 Clock Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="APB Devices Clock Enable Control Register 2" name="APBCLK2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0014">
+            <BitField name="I2S0CKEN" start="0" size="1" description="I2S0 Clock Enable Bit" />
+            <BitField name="I2S1CKEN" start="1" size="1" description="I2S1 Clock Enable Bit" />
+            <BitField name="SSMCCEN" start="2" size="1" description="SSMCC Clock Enable Bit (Write Protect)" />
+            <BitField name="SSPCCEN" start="3" size="1" description="SSPCC Clock Enable Bit (Write Protect)" />
+            <BitField name="SPI0CKEN" start="4" size="1" description="SPI0 Clock Enable Bit" />
+            <BitField name="SPI1CKEN" start="5" size="1" description="SPI1 Clock Enable Bit" />
+            <BitField name="SPI2CKEN" start="6" size="1" description="SPI2 Clock Enable Bit" />
+            <BitField name="SPI3CKEN" start="7" size="1" description="SPI3 Clock Enable Bit" />
+            <BitField name="ADCCKEN" start="24" size="1" description="ADC Clock Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Clock Source Select Control Register 0" name="CLKSEL0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0018">
+            <BitField name="CA35CKSEL" start="0" size="2" description="Cortex A35 CPU Clock Source Selection (Write Protect)" />
+            <BitField name="SYSCK0SEL" start="2" size="1" description="System Clock Source Selection (Write Protect)" />
+            <BitField name="LVRDBSEL" start="3" size="1" description="LVR Debounce Clock Selection (Write Protect)" />
+            <BitField name="SYSCK1SEL" start="4" size="2" description="System Clock Source Selection (Write Protect)" />
+            <BitField name="RTPSTSEL" start="8" size="3" description="RTP CortexM4 SysTick Clock Source Selection (Write Protect, SUBM)" />
+            <BitField name="SD0SEL" start="16" size="2" description="SD HOST0 Controller Core Logic Clock Source Selection" />
+            <BitField name="SD1SEL" start="18" size="2" description="SD HOST1 Controller Core Logic Clock Source Selection" />
+            <BitField name="DCUSEL" start="24" size="1" description="Display Controller Ultra Core Clock Source Selection (TZNS)" />
+            <BitField name="DCUPSEL" start="25" size="1" description="Display Controller Ultra Pixel Clock Source Selection (TZNS)" />
+            <BitField name="GFXSEL" start="26" size="1" description="GFX Core Clock Source Selection (TZNS)" />
+            <BitField name="DBGSEL" start="27" size="1" description="Coresight DBG Clock Source Selection (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Clock Source Select Control Register 1" name="CLKSEL1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x001C">
+            <BitField name="TMR0SEL" start="0" size="3" description="TIMER0 Clock Source Selection" />
+            <BitField name="TMR1SEL" start="4" size="3" description="TIMER1 Clock Source Selection" />
+            <BitField name="TMR2SEL" start="8" size="3" description="TIMER2 Clock Source Selection" />
+            <BitField name="TMR3SEL" start="12" size="3" description="TIMER3 Clock Source Selection" />
+            <BitField name="TMR4SEL" start="16" size="3" description="TIMER4 Clock Source Selection" />
+            <BitField name="TMR5SEL" start="20" size="3" description="TIMER5 Clock Source Selection" />
+            <BitField name="TMR6SEL" start="24" size="3" description="TIMER6 Clock Source Selection" />
+            <BitField name="TMR7SEL" start="28" size="3" description="TIMER7 Clock Source Selection" />
+        </Register>
+        <Register access="Read/Write" description="Clock Source Select Control Register 2" name="CLKSEL2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0020">
+            <BitField name="TMR8SEL" start="0" size="3" description="TIMER8 Clock Source Selection" />
+            <BitField name="TMR9SEL" start="4" size="3" description="TIMER9 Clock Source Selection" />
+            <BitField name="TMR10SEL" start="8" size="3" description="TIMER10 Clock Source Selection" />
+            <BitField name="TMR11SEL" start="12" size="3" description="TIMER11 Clock Source Selection" />
+            <BitField name="UART0SEL" start="16" size="2" description="UART0 Clock Source Selection" />
+            <BitField name="UART1SEL" start="18" size="2" description="UART1 Clock Source Selection" />
+            <BitField name="UART2SEL" start="20" size="2" description="UART2 Clock Source Selection" />
+            <BitField name="UART3SEL" start="22" size="2" description="UART3 Clock Source Selection" />
+            <BitField name="UART4SEL" start="24" size="2" description="UART4 Clock Source Selection" />
+            <BitField name="UART5SEL" start="26" size="2" description="UART5 Clock Source Selection" />
+            <BitField name="UART6SEL" start="28" size="2" description="UART6 Clock Source Selection" />
+            <BitField name="UART7SEL" start="30" size="2" description="UART7 Clock Source Selection" />
+        </Register>
+        <Register access="Read/Write" description="Clock Source Select Control Register 3" name="CLKSEL3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0024">
+            <BitField name="UART8SEL" start="0" size="2" description="UART8 Clock Source Selection" />
+            <BitField name="UART9SEL" start="2" size="2" description="UART6 Clock Source Selection" />
+            <BitField name="UART10SEL" start="4" size="2" description="UART10 Clock Source Selection" />
+            <BitField name="UART11SEL" start="6" size="2" description="UART11 Clock Source Selection" />
+            <BitField name="UART12SEL" start="8" size="2" description="UART12 Clock Source Selection" />
+            <BitField name="UART13SEL" start="10" size="2" description="UART13 Clock Source Selection" />
+            <BitField name="UART14SEL" start="12" size="2" description="UART14 Clock Source Selection" />
+            <BitField name="UART15SEL" start="14" size="2" description="UART15 Clock Source Selection" />
+            <BitField name="UART16SEL" start="16" size="2" description="UART16 Clock Source Selection" />
+            <BitField name="WDT0SEL" start="20" size="2" description="Watchdog Timer Clock Source Selection (Write Protect)" />
+            <BitField name="WWDT0SEL" start="22" size="2" description="Window Watchdog Timer Clock Source Selection (Write Protect)" />
+            <BitField name="WDT1SEL" start="24" size="2" description="Watchdog Timer Clock Source Selection (Write Protect)" />
+            <BitField name="WWDT1SEL" start="26" size="2" description="Window Watchdog Timer Clock Source Selection (Write Protect)" />
+            <BitField name="WDT2SEL" start="28" size="2" description="Watchdog Timer Clock Source Selection (Write Protect, SUBM)" />
+            <BitField name="WWDT2SEL" start="30" size="2" description="Window Watchdog Timer Clock Source Selection (Write Protect, SUBM)" />
+        </Register>
+        <Register access="Read/Write" description="Clock Source Select Control Register 4" name="CLKSEL4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0028">
+            <BitField name="SPI0SEL" start="0" size="2" description="SPI3 Clock Source Selection" />
+            <BitField name="SPI1SEL" start="2" size="2" description="SPI1 Clock Source Selection" />
+            <BitField name="SPI2SEL" start="4" size="2" description="SPI2 Clock Source Selection" />
+            <BitField name="SPI3SEL" start="6" size="2" description="SPI3 Clock Source Selection" />
+            <BitField name="QSPI0SEL" start="8" size="2" description="QSPI0 Clock Source Selection" />
+            <BitField name="QSPI1SEL" start="10" size="2" description="QSPI1 Clock Source Selection" />
+            <BitField name="I2S0SEL" start="12" size="2" description="I2S0 Clock Source Selection" />
+            <BitField name="I2S1SEL" start="14" size="2" description="I2S1 Clock Source Selection" />
+            <BitField name="CANFD0SEL" start="16" size="1" description="CANFD0 Clock Source Selection" />
+            <BitField name="CANFD1SEL" start="17" size="1" description="CANFD1 Clock Source Selection" />
+            <BitField name="CANFD2SEL" start="18" size="1" description="CANFD2 Clock Source Selection" />
+            <BitField name="CANFD3SEL" start="19" size="1" description="CANFD3 Clock Source Selection" />
+            <BitField name="CKOSEL" start="24" size="4" description="Reference Clock Our Source Selection" />
+            <BitField name="SC0SEL" start="28" size="1" description="Smart Card 0 Clock Source Selection" />
+            <BitField name="SC1SEL" start="29" size="1" description="Smart Card 1 Clock Source Selection" />
+            <BitField name="KPISEL" start="30" size="1" description="Key Pad Interface Clock Source Selection" />
+        </Register>
+        <Register access="Read/Write" description="Clock Divider Number Register 0" name="CLKDIV0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x002C">
+            <BitField name="CANFD0DIV" start="0" size="2" description="CANFD0 Clock Divide Number From CANFD0 Clock Source" />
+            <BitField name="CANFD1DIV" start="2" size="2" description="CANFD1 Clock Divide Number From CANFD1 Clock Source" />
+            <BitField name="CANFD2DIV" start="4" size="2" description="CANFD2 Clock Divide Number From CANFD2 Clock Source" />
+            <BitField name="CANFD3DIV" start="6" size="2" description="CANFD3 Clock Divide Number From CANFD3 Clock Source" />
+            <BitField name="DCUPDIV" start="24" size="2" description="Display Controller Ultra Pixel Divided Clock Source (Read Only)" />
+            <BitField name="ACLK0DIV" start="26" size="1" description="AXI0 Bus Clock Divide Number From CA-PLL Clock Source (Write Protect)" />
+            <BitField name="EMAC0DIV" start="28" size="2" description="EMAC0 TX Clock Divide Selection From EPLL Clock Source (Read Only)" />
+            <BitField name="EMAC1DIV" start="30" size="2" description="EMAC1 TX Clock Divide Selection From EPLL Clock Source (Read Only)" />
+        </Register>
+        <Register access="Read/Write" description="Clock Divider Number Register 1" name="CLKDIV1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0030">
+            <BitField name="SC0DIV" start="0" size="4" description="Smart Card 0 Clock Divide Number From SC0 Clock Source" />
+            <BitField name="SC1DIV" start="4" size="4" description="Smart Card 1 Clock Divide Number From SC1 Clock Source" />
+            <BitField name="UART0DIV" start="16" size="4" description="UART0 Clock Divide Number From UART0 Clock Source" />
+            <BitField name="UART1DIV" start="20" size="4" description="UART1 Clock Divide Number From UART1 Clock Source" />
+            <BitField name="UART2DIV" start="24" size="4" description="UART2 Clock Divide Number From UART2 Clock Source" />
+            <BitField name="UART3DIV" start="28" size="4" description="UART3 Clock Divide Number From UART3 Clock Source" />
+        </Register>
+        <Register access="Read/Write" description="Clock Divider Number Register 2" name="CLKDIV2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0034">
+            <BitField name="UART4DIV" start="0" size="4" description="UART4 Clock Divide Number From UART4 Clock Source" />
+            <BitField name="UART5DIV" start="4" size="4" description="UART5 Clock Divide Number From UART5 Clock Source" />
+            <BitField name="UART6DIV" start="8" size="4" description="UART6 Clock Divide Number From UART6 Clock Source" />
+            <BitField name="UART7DIV" start="12" size="4" description="UART7 Clock Divide Number From UART7 Clock Source" />
+            <BitField name="UART8DIV" start="16" size="4" description="UART8 Clock Divide Number From UART8 Clock Source" />
+            <BitField name="UART9DIV" start="20" size="4" description="UART9 Clock Divide Number From UART9 Clock Source" />
+            <BitField name="UART10DIV" start="24" size="4" description="UART10 Clock Divide Number From UART10 Clock Source" />
+            <BitField name="UART11DIV" start="28" size="4" description="UART11 Clock Divide Number From UART11 Clock Source" />
+        </Register>
+        <Register access="Read/Write" description="Clock Divider Number Register 3" name="CLKDIV3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0038">
+            <BitField name="UART12DIV" start="0" size="4" description="UART12 Clock Divide Number From UART12 Clock Source" />
+            <BitField name="UART13DIV" start="4" size="4" description="UART13 Clock Divide Number From UART13 Clock Source" />
+            <BitField name="UART14DIV" start="8" size="4" description="UART14 Clock Divide Number From UART14 Clock Source" />
+            <BitField name="UART15DIV" start="12" size="4" description="UART15 Clock Divide Number From UART15 Clock Source" />
+            <BitField name="UART16DIV" start="16" size="4" description="UART16 Clock Divide Number From UART16 Clock Source" />
+        </Register>
+        <Register access="Read/Write" description="Clock Divider Number Register 4" name="CLKDIV4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x003C">
+            <BitField name="ADCDIV" start="4" size="17" description="ADC Clock Divide Number From ADC Clock Source" />
+            <BitField name="KPIDIV" start="24" size="8" description="Keypad Interface Clock Divide Number From KPI Clock Source" />
+        </Register>
+        <Register access="Read/Write" description="Clock Output Control Register" name="CLKOCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0040">
+            <BitField name="FREQSEL" start="0" size="4" description="Clock Output Frequency Selection" />
+            <BitField name="CLKOEN" start="4" size="1" description="Clock Output Enable Bit" />
+            <BitField name="DIV1EN" start="5" size="1" description="Clock Output Divide One Enable Bit" />
+        </Register>
+        <Register access="ReadOnly" description="Clock Status Monitor Register" name="STATUS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0050">
+            <BitField name="HXTSTB" start="0" size="1" description="HXT Clock Source Stable Flag (Read Only)" />
+            <BitField name="LXTSTB" start="1" size="1" description="LXT Clock Source Stable Flag (Read Only)" />
+            <BitField name="SYSPLLSTB" start="2" size="1" description="SYS-PLL Clock Source Stable Flag (Read Only)" />
+            <BitField name="LIRCSTB" start="3" size="1" description="LIRC Clock Source Stable Flag (Read Only)" />
+            <BitField name="HIRCSTB" start="4" size="1" description="HIRC Clock Source Stable Flag (Read Only)" />
+            <BitField name="CAPLLSTB" start="6" size="1" description="Cortex35 PLL Clock Source Stable Flag (Read Only)" />
+            <BitField name="DDRPLLSTB" start="8" size="1" description="DDR-PLL Clock Source Stable Flag (Read Only)" />
+            <BitField name="EPLLSTB" start="9" size="1" description="EPLL Clock Source Stable Flag (Read Only)" />
+            <BitField name="APLLSTB" start="10" size="1" description="APLL Clock Source Stable Flag (Read Only)" />
+            <BitField name="VPLLSTB" start="11" size="1" description="VPLL Clock Source Stable Flag (Read Only)" />
+        </Register>
+        <Register access="Read/Write" description="CA-PLL Control Register 0" name="PLL0CTL0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0060">
+            <BitField name="FBDIV" start="0" size="11" description="PLL Feedback Divider Control (Write Protect)" />
+            <BitField name="INDIV" start="12" size="6" description="PLL Reference Input Divider Control (Write Protect)" />
+            <BitField name="MODE" start="18" size="2" description="Operation Mode Selection(Write Protect)" />
+            <BitField name="SSRATE" start="20" size="11" description="Spreading Frequency Control (Write Protect)" />
+        </Register>
+        <Register access="Read/Write" description="Clock Fail Detector Control Register" name="CLKDCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x00C0">
+            <BitField name="HXTFDEN" start="4" size="1" description="HXT Clock Fail Detector Enable Bit" />
+            <BitField name="HXTFIEN" start="5" size="1" description="HXT Clock Fail Interrupt Enable Bit" />
+            <BitField name="LXTFDEN" start="12" size="1" description="LXT Clock Fail Detector Enable Bit" />
+            <BitField name="LXTFIEN" start="13" size="1" description="LXT Clock Fail Interrupt Enable Bit" />
+            <BitField name="HXTFQDEN" start="16" size="1" description="HXT Clock Frequency Monitor Enable Bit" />
+            <BitField name="HXTFQIEN" start="17" size="1" description="HXT Clock Frequency Monitor Interrupt Enable Bit" />
+        </Register>
+        <Register access="Read/Write" description="Clock Fail Detector Status Register" name="CLKDSTS" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x00C4">
+            <BitField name="HXTFIF" start="0" size="1" description="HXT Clock Fail Interrupt Flag (Write Protect, Write 1 to Clear)" />
+            <BitField name="LXTFIF" start="1" size="1" description="LXT Clock Fail Interrupt Flag (Write Protect, Write 1 to Clear)" />
+            <BitField name="HXTFQIF" start="8" size="1" description="HXT Clock Frequency Monitor Interrupt Flag (Write Protect, Write 1 to Clear)" />
+        </Register>
+        <Register access="Read/Write" description="Clock Frequency Detector Upper Boundary Register" name="CDUPB" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x00C8">
+            <BitField name="UPERBD" start="0" size="10" description="HXT Clock Frequency Detector Upper Boundary" />
+        </Register>
+        <Register access="Read/Write" description="Clock Frequency Detector Lower Boundary Register" name="CDLOWB" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x00CC">
+            <BitField name="LOWERBD" start="0" size="10" description="HXT Clock Frequency Detector Lower Boundary" />
+        </Register>
+        <Register access="Read/Write" description="Clock Filter Control Register" name="CKFLTRCTL" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x00D0">
+            <BitField name="HXTFLTREN" start="0" size="1" description="HXT Clock Filter Enable Control Bit (Write Protect)" />
+            <BitField name="HXTFLTRSEL" start="1" size="1" description="HXT Clock Filter Frequency Select" />
+            <BitField name="HXTGTEN" start="4" size="1" description="HXT Clock Gating Enable Control Bit (Write Protect)" />
+            <BitField name="HXTBYPSEN" start="5" size="1" description="HXT Clock Bypass Enable Control Bit (Write Protect)" />
+            <BitField name="HIRCFLTREN" start="8" size="1" description="HIRC Clock Filter Enable Control Bit (Write Protect)" />
+            <BitField name="HIRCFLTRSEL" start="9" size="1" description="HIRC Clock Filter Frequency Select" />
+            <BitField name="HIRCGTEN" start="12" size="1" description="HIRC Clock Gating Enable Control Bit (Write Protect)" />
+        </Register>
+    </RegisterGroup>
+</Processor>

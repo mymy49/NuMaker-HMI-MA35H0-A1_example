@@ -1,34 +1,25 @@
-/*********************************************************************
-*                    SEGGER Microcontroller GmbH                     *
-*                        The Embedded Experts                        *
-**********************************************************************
-
--------------------------- END-OF-HEADER -----------------------------
-
-File    : main.c
-Purpose : Generic application start
-
-*/
+/*
+ * Copyright (c) 2025 Yoon-Ki Hong
+ *
+ * This file is subject to the terms and conditions of the MIT License.
+ * See the file "LICENSE" in the main directory of this archive for more details.
+ */
 
 #include <stdio.h>
+#include <yss.h>
+#include <util/runtime.h>
 
-/*********************************************************************
-*
-*       main()
-*
-*  Function description
-*   Application entry point.
-*/
+volatile uint64_t gDebug;
+
+#include <stdint.h>
+
 int main(void) 
 {
-	int i;
+	initializeYss();
 
-	for(i = 0; i < 100; i++) 
-	{
-		printf("Hello World %d!\n", i);
-	}
-
-	while (1);
+    while (1)
+    {
+		runtime::getMsec();
+//		printf("%d\r", (uint32_t)runtime::getMsec());
+    }
 }
-
-/*************************** End of file ****************************/

@@ -12,14 +12,14 @@
 #define YSS_CONFIG__H_
 
 // ####################### 외부 크리스탈 클럭 주파수 설정 #######################
-// 아래 HSE_CLOCK_FREQ가 정의 되어 있으면 HSE 클럭을 소스로 PLL 설정이 이뤄집니다.
+// 아래 HXT_CLOCK_FREQ가 정의 되어 있으면 HSE 클럭을 소스로 PLL 설정이 이뤄집니다.
 // 정의되어 있지 않으면 HSI 클럭을 소스로 PLL 설정이 이뤄집니다.
 // 크리스탈은 반드시 4 MHz의 배수로 사용해야 합니다.
-//#define HSE_CLOCK_FREQ 12000000
+//#define HXT_CLOCK_FREQ 24000000
 
 // ####################### 스케줄러 설정 #######################
 // runtime 함수를 지원할 TIMER 장치 설정 (RUNTIME_TIMER0, 1, 2, 3)
-#define YSS_TIMER			RUNTIME_TIMER0
+#define YSS_RUNTIME_TIMER	RUNTIME_TIMER1
 
 // 쓰레드당 할당 받는 Systick Clock의 수
 #define THREAD_GIVEN_CLOCK	20000

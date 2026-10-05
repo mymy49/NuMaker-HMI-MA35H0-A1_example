@@ -1,0 +1,147 @@
+    <RegisterGroup description="Generic Interrupt Controller Distributor (GICD)" name="GICD" start="0x50801000">
+        <Register access="Read/Write" description="Distributor Control Register" name="GICD_CTLR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x0">
+            <BitField description="Enable Group 0" name="EnableGrp0" size="1" start="0" />
+            <BitField description="Enable Group 1" name="EnableGrp1" size="1" start="1" />
+        </Register>
+        <Register access="ReadOnly" description="Interrupt Controller Type Register" name="GICD_TYPER" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4" />
+        <Register access="ReadOnly" description="Distributor Implementer Identification Register" name="GICD_IIDR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8" />
+        <Register access="Read/Write" description="Interrupt Group Register 0" name="GICD_IGROUPR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x80" />
+        <Register access="Read/Write" description="Interrupt Group Register 1" name="GICD_IGROUPR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x84" />
+        <Register access="Read/Write" description="Interrupt Group Register 2" name="GICD_IGROUPR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x88" />
+        <Register access="Read/Write" description="Interrupt Group Register 3" name="GICD_IGROUPR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8c" />
+        <Register access="Read/Write" description="Interrupt Group Register 4" name="GICD_IGROUPR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x90" />
+        <Register access="Read/Write" description="Interrupt Group Register 5" name="GICD_IGROUPR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x94" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 0" name="GICD_ISENABLER0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x100" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 1" name="GICD_ISENABLER1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x104" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 2" name="GICD_ISENABLER2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x108" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 3" name="GICD_ISENABLER3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x10c" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 4" name="GICD_ISENABLER4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x110" />
+        <Register access="Read/Write" description="Interrupt Set-Enable Register 5" name="GICD_ISENABLER5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x114" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 0" name="GICD_ICENABLER0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x180" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 1" name="GICD_ICENABLER1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x184" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 2" name="GICD_ICENABLER2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x188" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 3" name="GICD_ICENABLER3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x18c" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 4" name="GICD_ICENABLER4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x190" />
+        <Register access="Read/Write" description="Interrupt Clear-Enable Register 5" name="GICD_ICENABLER5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x194" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 0" name="GICD_ISPENDR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x200" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 1" name="GICD_ISPENDR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x204" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 2" name="GICD_ISPENDR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x208" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 3" name="GICD_ISPENDR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x20c" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 4" name="GICD_ISPENDR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x210" />
+        <Register access="Read/Write" description="Interrupt Set-Pending Register 5" name="GICD_ISPENDR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x214" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 0" name="GICD_ICPENDR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x280" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 1" name="GICD_ICPENDR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x284" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 2" name="GICD_ICPENDR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x288" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 3" name="GICD_ICPENDR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x28c" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 4" name="GICD_ICPENDR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x290" />
+        <Register access="Read/Write" description="Interrupt Clear-Pending Register 5" name="GICD_ICPENDR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x294" />
+        <Register access="Read/Write" description="Interrupt Priority Register 0" name="GICD_IPRIORITYR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x400" />
+        <Register access="Read/Write" description="Interrupt Priority Register 1" name="GICD_IPRIORITYR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x404" />
+        <Register access="Read/Write" description="Interrupt Priority Register 2" name="GICD_IPRIORITYR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x408" />
+        <Register access="Read/Write" description="Interrupt Priority Register 3" name="GICD_IPRIORITYR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x40c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 4" name="GICD_IPRIORITYR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x410" />
+        <Register access="Read/Write" description="Interrupt Priority Register 5" name="GICD_IPRIORITYR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x414" />
+        <Register access="Read/Write" description="Interrupt Priority Register 6" name="GICD_IPRIORITYR6" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x418" />
+        <Register access="Read/Write" description="Interrupt Priority Register 7" name="GICD_IPRIORITYR7" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x41c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 8" name="GICD_IPRIORITYR8" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x420" />
+        <Register access="Read/Write" description="Interrupt Priority Register 9" name="GICD_IPRIORITYR9" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x424" />
+        <Register access="Read/Write" description="Interrupt Priority Register 10" name="GICD_IPRIORITYR10" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x428" />
+        <Register access="Read/Write" description="Interrupt Priority Register 11" name="GICD_IPRIORITYR11" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x42c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 12" name="GICD_IPRIORITYR12" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x430" />
+        <Register access="Read/Write" description="Interrupt Priority Register 13" name="GICD_IPRIORITYR13" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x434" />
+        <Register access="Read/Write" description="Interrupt Priority Register 14" name="GICD_IPRIORITYR14" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x438" />
+        <Register access="Read/Write" description="Interrupt Priority Register 15" name="GICD_IPRIORITYR15" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x43c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 16" name="GICD_IPRIORITYR16" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x440" />
+        <Register access="Read/Write" description="Interrupt Priority Register 17" name="GICD_IPRIORITYR17" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x444" />
+        <Register access="Read/Write" description="Interrupt Priority Register 18" name="GICD_IPRIORITYR18" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x448" />
+        <Register access="Read/Write" description="Interrupt Priority Register 19" name="GICD_IPRIORITYR19" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x44c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 20" name="GICD_IPRIORITYR20" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x450" />
+        <Register access="Read/Write" description="Interrupt Priority Register 21" name="GICD_IPRIORITYR21" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x454" />
+        <Register access="Read/Write" description="Interrupt Priority Register 22" name="GICD_IPRIORITYR22" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x458" />
+        <Register access="Read/Write" description="Interrupt Priority Register 23" name="GICD_IPRIORITYR23" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x45c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 24" name="GICD_IPRIORITYR24" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x460" />
+        <Register access="Read/Write" description="Interrupt Priority Register 25" name="GICD_IPRIORITYR25" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x464" />
+        <Register access="Read/Write" description="Interrupt Priority Register 26" name="GICD_IPRIORITYR26" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x468" />
+        <Register access="Read/Write" description="Interrupt Priority Register 27" name="GICD_IPRIORITYR27" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x46c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 28" name="GICD_IPRIORITYR28" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x470" />
+        <Register access="Read/Write" description="Interrupt Priority Register 29" name="GICD_IPRIORITYR29" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x474" />
+        <Register access="Read/Write" description="Interrupt Priority Register 30" name="GICD_IPRIORITYR30" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x478" />
+        <Register access="Read/Write" description="Interrupt Priority Register 31" name="GICD_IPRIORITYR31" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x47c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 32" name="GICD_IPRIORITYR32" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x480" />
+        <Register access="Read/Write" description="Interrupt Priority Register 33" name="GICD_IPRIORITYR33" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x484" />
+        <Register access="Read/Write" description="Interrupt Priority Register 34" name="GICD_IPRIORITYR34" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x488" />
+        <Register access="Read/Write" description="Interrupt Priority Register 35" name="GICD_IPRIORITYR35" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x48c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 36" name="GICD_IPRIORITYR36" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x490" />
+        <Register access="Read/Write" description="Interrupt Priority Register 37" name="GICD_IPRIORITYR37" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x494" />
+        <Register access="Read/Write" description="Interrupt Priority Register 38" name="GICD_IPRIORITYR38" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x498" />
+        <Register access="Read/Write" description="Interrupt Priority Register 39" name="GICD_IPRIORITYR39" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x49c" />
+        <Register access="Read/Write" description="Interrupt Priority Register 40" name="GICD_IPRIORITYR40" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4a0" />
+        <Register access="Read/Write" description="Interrupt Priority Register 41" name="GICD_IPRIORITYR41" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4a4" />
+        <Register access="Read/Write" description="Interrupt Priority Register 42" name="GICD_IPRIORITYR42" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4a8" />
+        <Register access="Read/Write" description="Interrupt Priority Register 43" name="GICD_IPRIORITYR43" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4ac" />
+        <Register access="Read/Write" description="Interrupt Priority Register 44" name="GICD_IPRIORITYR44" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4b0" />
+        <Register access="Read/Write" description="Interrupt Priority Register 45" name="GICD_IPRIORITYR45" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4b4" />
+        <Register access="Read/Write" description="Interrupt Priority Register 46" name="GICD_IPRIORITYR46" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4b8" />
+        <Register access="Read/Write" description="Interrupt Priority Register 47" name="GICD_IPRIORITYR47" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x4bc" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 0" name="GICD_ITARGETSR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x800" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 1" name="GICD_ITARGETSR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x804" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 2" name="GICD_ITARGETSR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x808" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 3" name="GICD_ITARGETSR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x80c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 4" name="GICD_ITARGETSR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x810" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 5" name="GICD_ITARGETSR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x814" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 6" name="GICD_ITARGETSR6" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x818" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 7" name="GICD_ITARGETSR7" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x81c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 8" name="GICD_ITARGETSR8" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x820" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 9" name="GICD_ITARGETSR9" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x824" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 10" name="GICD_ITARGETSR10" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x828" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 11" name="GICD_ITARGETSR11" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x82c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 12" name="GICD_ITARGETSR12" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x830" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 13" name="GICD_ITARGETSR13" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x834" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 14" name="GICD_ITARGETSR14" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x838" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 15" name="GICD_ITARGETSR15" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x83c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 16" name="GICD_ITARGETSR16" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x840" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 17" name="GICD_ITARGETSR17" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x844" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 18" name="GICD_ITARGETSR18" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x848" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 19" name="GICD_ITARGETSR19" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x84c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 20" name="GICD_ITARGETSR20" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x850" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 21" name="GICD_ITARGETSR21" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x854" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 22" name="GICD_ITARGETSR22" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x858" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 23" name="GICD_ITARGETSR23" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x85c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 24" name="GICD_ITARGETSR24" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x860" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 25" name="GICD_ITARGETSR25" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x864" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 26" name="GICD_ITARGETSR26" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x868" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 27" name="GICD_ITARGETSR27" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x86c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 28" name="GICD_ITARGETSR28" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x870" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 29" name="GICD_ITARGETSR29" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x874" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 30" name="GICD_ITARGETSR30" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x878" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 31" name="GICD_ITARGETSR31" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x87c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 32" name="GICD_ITARGETSR32" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x880" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 33" name="GICD_ITARGETSR33" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x884" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 34" name="GICD_ITARGETSR34" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x888" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 35" name="GICD_ITARGETSR35" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x88c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 36" name="GICD_ITARGETSR36" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x890" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 37" name="GICD_ITARGETSR37" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x894" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 38" name="GICD_ITARGETSR38" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x898" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 39" name="GICD_ITARGETSR39" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x89c" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 40" name="GICD_ITARGETSR40" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8a0" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 41" name="GICD_ITARGETSR41" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8a4" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 42" name="GICD_ITARGETSR42" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8a8" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 43" name="GICD_ITARGETSR43" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8ac" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 44" name="GICD_ITARGETSR44" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8b0" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 45" name="GICD_ITARGETSR45" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8b4" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 46" name="GICD_ITARGETSR46" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8b8" />
+        <Register access="Read/Write" description="Interrupt Processor Target Register 47" name="GICD_ITARGETSR47" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0x8bc" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 0" name="GICD_ICFGR0" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc00" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 1" name="GICD_ICFGR1" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc04" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 2" name="GICD_ICFGR2" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc08" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 3" name="GICD_ICFGR3" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc0c" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 4" name="GICD_ICFGR4" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc10" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 5" name="GICD_ICFGR5" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc14" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 6" name="GICD_ICFGR6" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc18" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 7" name="GICD_ICFGR7" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc1c" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 8" name="GICD_ICFGR8" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc20" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 9" name="GICD_ICFGR9" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc24" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 10" name="GICD_ICFGR10" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc28" />
+        <Register access="Read/Write" description="Interrupt Configuration Register 11" name="GICD_ICFGR11" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xc2c" />
+        <Register access="WriteOnly" description="Software Generated Interrupt Register" name="GICD_SGIR" reset_mask="0xFFFFFFFF" reset_value="0x00000000" size="4" start="+0xF00" />
+    </RegisterGroup>

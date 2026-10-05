@@ -5,7 +5,7 @@
     c_preprocessor_definitions="DEBUG"
     gcc_debugging_level="Level 3"
     gcc_omit_frame_pointer="Yes"
-    gcc_optimization_level="None" />
+    gcc_optimization_level="Level 1" />
   <configuration
     Name="Release"
     c_preprocessor_definitions="NDEBUG"
@@ -49,6 +49,7 @@
       arm_target_interface_type="JTAG"
       c_preprocessor_definitions="__MA35H0_FAMILY;__MA35H04F764C__;__SEGGER_LINKER;__aarch64__"
       c_user_include_directories=".;$(ProjectDir)/../yss/inc;$(ProjectDir)/../CMSIS/MA35H0/Include;$(ProjectDir)/../CMSIS/Arch/Core_A/Include;$(ProjectDir)/App/inc"
+      debug_register_definition_file="$(ProjectDir)/MA35H0_Registers.xml"
       debug_stack_pointer_start="__stack_end__"
       debug_target_connection="J-Link"
       gcc_entry_point="Reset_Handler"
