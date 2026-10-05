@@ -22,7 +22,7 @@
 #define YSS_RUNTIME_TIMER	RUNTIME_TIMER1
 
 // 쓰레드당 할당 받는 Systick Clock의 수
-#define THREAD_GIVEN_CLOCK	20000
+#define THREAD_GIVEN_CLOCK	1000000
 
 // 최대 등록 가능한 쓰레드의 수
 #define MAX_THREAD			16

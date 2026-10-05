@@ -173,6 +173,7 @@ current_el_sp0_irq:
   mrs x0, ELR_EL1
   mrs x1, ESR_EL1  
   bl irqExceptionHandler
+  msr ESR_EL1, x1
   msr ELR_EL1, x0
 
   ldp x18, x30, [sp], #16	
@@ -212,7 +213,12 @@ current_el_spx_irq:
 
   mrs x0, ELR_EL1
   mrs x1, ESR_EL1  
+  stp x0, x1, [sp, #-16]!  // 스택 메모리에 물리적으로 봉인!
+
   bl irqExceptionHandler
+
+  ldp x0, x1, [sp], #16
+  msr ESR_EL1, x1
   msr ELR_EL1, x0
 
   ldp x18, x30, [sp], #16	
