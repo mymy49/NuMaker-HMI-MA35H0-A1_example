@@ -83,49 +83,41 @@ Purpose   : Generic startup and exception handlers for ARM64 devices.
   .global Debug_Start_Here
   .global Reset_Handler
   .global reset_handler
+  .global SystemInit
   .type Reset_Handler, function
   .equ reset_handler, Reset_Handler
   .section .init, "ax"
 
 Reset_Handler:
-
-  mrs     x1, mpidr_el1
-  and     x1, x1, #3
-  cbz     x1, 1f    
+	mrs     x1, mpidr_el1
+	and     x1, x1, #3
+	cbz     x1, 1f    
 2:
-  wfi
-  b       2b
+	wfi
+	b       2b
 1: 
 #if 0
-  b .
+	b .
 
 Debug_Start_Here:
 #endif
-  // Move to EL1 if at EL2
-  mrs x5, CurrentEL
-  cmp x5, #(2<<2)
-  bne 3f
+	// SystemInit Call
+	bl SystemInit
 
-  ldr x5, =__stack_el1_end__
-  msr sp_el1, x5
+	ldr x0, =__stack_el1_end__
+	msr sp_el1, x0
 
-  mrs x0, HCR_EL2
-  orr x0, x0, #(1<<31) // RW
-  msr HCR_EL2, x0
-  mov x0, #4 // EL1t
-  msr SPSR_EL2, x0
-  adr x6, 3f
-  msr ELR_EL2, x6
-  eret
-3:
+	ldr x0, =__stack_el0_end__
+	msr sp_el0, x0
 
-  adr x0, _vectors
-  msr vbar_el3, x0
+	adr x0, _vectors
+	msr vbar_el3, x0
+	msr vbar_el1, x0
 
-  mov x0, #(0x3 << 20) // FPEN disables trapping to EL1.
-  msr cpacr_el1, x0
+	mov x0, #(0x3 << 20) // FPEN disables trapping to EL1.
+	msr cpacr_el1, x0
 
-  b _start
+	b _start
 END_FUNC Reset_Handler
 
 .weak synchronousExceptionHandler
