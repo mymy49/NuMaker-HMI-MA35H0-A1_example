@@ -89,13 +89,79 @@ Purpose   : Generic startup and exception handlers for ARM64 devices.
   .section .init, "ax"
 
 Reset_Handler:
+	// MMU, D-cache, I-cache 끄기
+	mrs     x0, sctlr_el3
+	bic     x0, x0, #(1<<0)          // M
+	bic     x0, x0, #(1<<2)          // C
+	bic     x0, x0, #(1<<12)         // I
+	msr     sctlr_el3, x0
+	isb
+
+	// === 추가된 부분: SCR_EL3 및 CPTR_EL3 초기화 (하위 EL 설정) ===
+	mov     x0, #0
+	orr     x0, x0, #(1 << 11)  // ST 비트: 하위 EL에서 Secure Timer 접근 허용
+	orr     x0, x0, #(1 << 10)  // RW 비트: 하위 EL(EL1, EL0)을 64비트(AArch64) 상태로 실행 (가장 중요)
+	// 참고: bit 1(IRQ)과 bit 2(FIQ)를 0으로 두어, EL0에서 발생한 인터럽트가 EL3가 아닌 EL1으로 향하도록 라우팅합니다.
+	msr     scr_el3, x0
+	mov     x0, #0              // CPTR_EL3의 모든 비트를 0으로 초기화
+	msr     cptr_el3, x0        // FPU(부동소수점) 명령어가 EL3로 트랩(예외)되는 것을 방지
+	isb
+
+	// I-cache, TLB 무효화
+ 	ic      iallu
+	tlbi    alle3
+	dsb     sy
+	isb
+
+	// D-cache를 set/way 방식으로 무효화 (L1, L2)
+	// 이전 실행의 dirty 데이터는 버립니다(clean하지 않음).
+	mrs     x0, clidr_el1
+	ubfx    x3, x0, #24, #3          // LoC
+	lsl     x3, x3, #1               // LoC * 2
+	cbz     x3, 5f
+	mov     x10, #0                  // x10 = level * 2
+1:
+	add     x2, x10, x10, lsr #1     // level * 3
+	lsr     x1, x0, x2
+	and     x1, x1, #7               // 이 level의 cache type
+	cmp     x1, #2
+	b.lt    4f                       // 데이터 캐시 없음
+	msr     csselr_el1, x10
+	isb
+	mrs     x1, ccsidr_el1
+	and     x2, x1, #7
+	add     x2, x2, #4               // log2(line bytes)
+	ubfx    x4, x1, #3, #10          // max way
+	clz     w5, w4                   // way 필드 shift
+	ubfx    x7, x1, #13, #15         // max set
+2:
+	mov     x9, x4
+3:
+	lsl     x6, x9, x5
+	orr     x11, x10, x6
+	lsl     x6, x7, x2
+	orr     x11, x11, x6
+	dc      isw, x11
+	subs    x9, x9, #1
+	b.ge    3b
+	subs    x7, x7, #1
+	b.ge    2b
+4:
+	add     x10, x10, #2
+	cmp     x3, x10
+	b.gt    1b
+5:
+	dsb     sy
+	isb
+	
+	// Core 번호 확인
 	mrs     x1, mpidr_el1
 	and     x1, x1, #3
-	cbz     x1, 1f    
-2:
+	cbz     x1, 7f    
+6:
 	wfi
-	b       2b
-1: 
+	b       6b
+7: 
 #if 0
 	b .
 
@@ -122,113 +188,388 @@ END_FUNC Reset_Handler
 
 .weak synchronousExceptionHandler
 .weak irqExceptionHandler
+.weak fiqExceptionHandler
+.weak sErrorExceptionHandler
 
 .section .init, "ax"
-  .balign 0x800
-  .global _vectors
+	.balign 0x800
+	.global _vectors
 _vectors:
 current_el_sp0_sync:
-  stp x0, x1, [sp, #-16]!
-  stp x2, x3, [sp, #-16]!
-  stp x4, x5, [sp, #-16]!
-  stp x6, x7, [sp, #-16]!
-  stp x8, x9, [sp, #-16]!
-  stp x10, x11, [sp, #-16]!
-  stp x12, x13, [sp, #-16]!
-  stp x14, x15, [sp, #-16]!
-  mrs x0, ELR_EL1
-  mrs x1, ESR_EL1
-  bl synchronousExceptionHandler
-  msr ELR_EL1, x0
-  ldp x14, x15, [sp], #16
-  ldp x12, x13, [sp], #16
-  ldp x10, x11, [sp], #16
-  ldp x8, x9, [sp], #16
-  ldp x6, x7, [sp], #16
-  ldp x4, x5, [sp], #16
-  ldp x2, x3, [sp], #16
-  ldp x0, x1, [sp], #16
-  eret
-  .balign 0x80
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl synchronousExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
 current_el_sp0_irq:
-  stp x0, x1, [sp, #-16]!
-  stp x2, x3, [sp, #-16]!
-  stp x4, x5, [sp, #-16]!
-  stp x6, x7, [sp, #-16]!
-  stp x8, x9, [sp, #-16]!
-  stp x10, x11, [sp, #-16]!
-  stp x12, x13, [sp, #-16]!
-  stp x14, x15, [sp, #-16]!
-  stp x16, x17, [sp, #-16]!
-  stp x18, x30, [sp, #-16]!  // ★ x30(LR) 백업 필수!
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl irqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
 
-  mrs x0, ELR_EL1
-  mrs x1, ESR_EL1  
-  bl irqExceptionHandler
-  msr ESR_EL1, x1
-  msr ELR_EL1, x0
-
-  ldp x18, x30, [sp], #16	
-  ldp x16, x17, [sp], #16
-  ldp x14, x15, [sp], #16
-  ldp x12, x13, [sp], #16
-  ldp x10, x11, [sp], #16
-  ldp x8, x9, [sp], #16
-  ldp x6, x7, [sp], #16
-  ldp x4, x5, [sp], #16
-  ldp x2, x3, [sp], #16
-  ldp x0, x1, [sp], #16
-  eret
-  .balign 0x80
+	.balign 0x80
 current_el_sp0_fiq:
-  b .
-  .balign 0x80
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl fiqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
 current_el_sp0_serror:
-  b .
-  .balign 0x80
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl sErrorExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
 current_el_spx_sync:
-  mrs x0, ESR_EL1
-  mrs x1, FAR_EL1
-  b .
-  .balign 0x80
+	b . // 에러 발생 시 여기서 안전하게 무한 대기
+
+	.balign 0x80
 current_el_spx_irq:
-  stp x0, x1, [sp, #-16]!
-  stp x2, x3, [sp, #-16]!
-  stp x4, x5, [sp, #-16]!
-  stp x6, x7, [sp, #-16]!
-  stp x8, x9, [sp, #-16]!
-  stp x10, x11, [sp, #-16]!
-  stp x12, x13, [sp, #-16]!
-  stp x14, x15, [sp, #-16]!
-  stp x16, x17, [sp, #-16]!
-  stp x18, x30, [sp, #-16]!  // ★ x30(LR) 백업 필수!
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl irqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
 
-  mrs x0, ELR_EL1
-  mrs x1, ESR_EL1  
-  stp x0, x1, [sp, #-16]!  // 스택 메모리에 물리적으로 봉인!
-
-  bl irqExceptionHandler
-
-  ldp x0, x1, [sp], #16
-  msr ESR_EL1, x1
-  msr ELR_EL1, x0
-
-  ldp x18, x30, [sp], #16	
-  ldp x16, x17, [sp], #16
-  ldp x14, x15, [sp], #16
-  ldp x12, x13, [sp], #16
-  ldp x10, x11, [sp], #16
-  ldp x8, x9, [sp], #16
-  ldp x6, x7, [sp], #16
-  ldp x4, x5, [sp], #16
-  ldp x2, x3, [sp], #16
-  ldp x0, x1, [sp], #16
-  eret
-  .balign 0x80
+	.balign 0x80
 current_el_spx_fiq:
-  b .
-  .balign 0x80
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl fiqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
 current_el_spx_serror:
-  b .
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl sErrorExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+lower_el_aarch64_sync:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl synchronousExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
+lower_el_aarch64_irq:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl irqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
+lower_el_aarch64_fiq:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl fiqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
+lower_el_aarch64_serror:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl sErrorExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
+lower_el_aarch32_sync:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl synchronousExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
+lower_el_aarch32_irq:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl irqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
+lower_el_aarch32_fiq:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl fiqExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
+
+	.balign 0x80
+lower_el_aarch32_serror:
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl sErrorExceptionHandler 
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
 
 /*************************** End of file ****************************/

@@ -47,7 +47,7 @@ void ResetTarget(void)
     JLINK_MEM_WriteU32(0xE0C10090, 0x00000001); // DBGDRCR Halt Request
 
 	// Core Warm Reset Request(Unknown if it operates normally)
-	JLINK_MEM_WriteU32(0xE0C10310, 0x2);
+	//JLINK_MEM_WriteU32(0xE0C10310, 0x2);
 	
 	// Unlock
     JLINK_MEM_WriteU32(0x404601A0, 0x00000059);

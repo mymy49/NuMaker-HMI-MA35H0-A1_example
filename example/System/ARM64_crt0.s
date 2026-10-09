@@ -200,6 +200,26 @@ __start:
   bx r2
 #endif
 #endif
+// ---------------------------------------------------------
+// SPSR_ELx (Saved Program Status Register) Bit Definitions
+// ---------------------------------------------------------
+
+// 1. 동작 모드 및 스택(Exception Level & SP Select) 정의 (M[4:0] 비트)
+// M[4] = 0 (AArch64 상태 실행)
+#define SPSR_MODE_EL0t      0x00    // EL0 Thread 모드 (비특권 유저 모드)
+#define SPSR_MODE_EL1t      0x04    // EL1 권한 + SP_EL0 스택 사용 (Flat RTOS 태스크용)
+#define SPSR_MODE_EL1h      0x05    // EL1 권한 + SP_EL1 스택 사용 (커널/핸들러용)
+#define SPSR_MODE_EL2t      0x08    // EL2 권한 + SP_EL0 스택 사용
+#define SPSR_MODE_EL2h      0x09    // EL2 권한 + SP_EL2 스택 사용
+#define SPSR_MODE_EL3t      0x0C    // EL3 권한 + SP_EL0 스택 사용
+#define SPSR_MODE_EL3h      0x0D    // EL3 권한 + SP_EL3 스택 사용
+
+// 2. 인터럽트 마스크(Mask) 비트 정의
+// 비트를 1로 셋(Set)하면 해당 예외를 무시(Mask)함
+#define SPSR_FIQ_MASK       (1 << 6)    // Bit 6: FIQ (Fast Interrupt) 마스크
+#define SPSR_IRQ_MASK       (1 << 7)    // Bit 7: IRQ (일반 인터럽트) 마스크
+#define SPSR_SERROR_MASK    (1 << 8)    // Bit 8: SError (System Error, 비동기 폴트) 마스크
+#define SPSR_DEBUG_MASK     (1 << 9)    // Bit 9: Debug Exception 마스크
 
   .type start, function
 start:
@@ -208,7 +228,7 @@ start:
   ldr x1, =__ctors_end__
 ctor_loop:
   cmp x0, x1
-  beq ctor_end
+     beq ctor_end
   ldr x2, [x0], #+8
   stp x0, x1, [sp, #0x0]! 
   blr x2
@@ -226,11 +246,15 @@ __startup_complete:
   blr x2
   ldr x1, =args
 #else
+  ldr x0, =(SPSR_MODE_EL1t | SPSR_IRQ_MASK | SPSR_FIQ_MASK)
+  msr spsr_el3, x0
+
   mov x0, #0
   mov x1, #0
 #endif
   ldr x2, =APP_ENTRY_POINT
-  blr x2
+  msr elr_el3, x2
+  eret
   .size _start,.-_start
 
   .type exit, function
