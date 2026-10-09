@@ -190,6 +190,7 @@ END_FUNC Reset_Handler
 .weak irqExceptionHandler
 .weak fiqExceptionHandler
 .weak sErrorExceptionHandler
+.global yss_switchContext
 
 .section .init, "ax"
 	.balign 0x800
@@ -222,6 +223,13 @@ current_el_sp0_sync:
 	.balign 0x80
 current_el_sp0_irq:
 	stp x0, x1, [sp, #-16]!
+	movz x1, #0x2000
+	movk x1, #0x5080, lsl #16
+	ldr w0, [x1, #0xc]
+	and w0, w0, #0x3FF
+	str w0, [x1, #0x10]
+	cbz w0, pendsv
+
 	stp x2, x3, [sp, #-16]!
 	stp x4, x5, [sp, #-16]!
 	stp x6, x7, [sp, #-16]!
@@ -296,7 +304,28 @@ current_el_sp0_serror:
 
 	.balign 0x80
 current_el_spx_sync:
-	b . // 에러 발생 시 여기서 안전하게 무한 대기
+	stp x0, x1, [sp, #-16]!
+	stp x2, x3, [sp, #-16]!
+	stp x4, x5, [sp, #-16]!
+	stp x6, x7, [sp, #-16]!
+	stp x8, x9, [sp, #-16]!
+	stp x10, x11, [sp, #-16]!
+	stp x12, x13, [sp, #-16]!
+	stp x14, x15, [sp, #-16]!
+	stp x16, x17, [sp, #-16]!
+	stp x18, x30, [sp, #-16]!
+	bl synchronousExceptionHandler
+	ldp x18, x30, [sp], #16	
+	ldp x16, x17, [sp], #16
+	ldp x14, x15, [sp], #16
+	ldp x12, x13, [sp], #16
+	ldp x10, x11, [sp], #16
+	ldp x8, x9, [sp], #16
+	ldp x6, x7, [sp], #16
+	ldp x4, x5, [sp], #16
+	ldp x2, x3, [sp], #16
+	ldp x0, x1, [sp], #16
+	eret
 
 	.balign 0x80
 current_el_spx_irq:
@@ -571,5 +600,101 @@ lower_el_aarch32_serror:
 	ldp x2, x3, [sp], #16
 	ldp x0, x1, [sp], #16
 	eret
+
+pendsv :
+	ldp x0, x1, [sp], #16
+	str x30, [sp, #-16]!
+	mrs x30, sp_el0
+	
+	stp x0, x1, [x30, #-16]!
+	mov x0, x30	
+	stp x2, x3, [x0, #-16]!
+	stp x4, x5, [x0, #-16]!
+	stp x6, x7, [x0, #-16]!
+	stp x8, x9, [x0, #-16]!
+	stp x10, x11, [x0, #-16]!
+	stp x12, x13, [x0, #-16]!
+	stp x14, x15, [x0, #-16]!
+	stp x16, x17, [x0, #-16]!
+	stp x18, x19, [x0, #-16]!
+	stp x20, x21, [x0, #-16]!
+	stp x22, x23, [x0, #-16]!
+	stp x24, x25, [x0, #-16]!
+	stp x26, x27, [x0, #-16]!
+	stp x28, x29, [x0, #-16]!
+	ldr x30, [sp], #16
+	str x30, [x0, #-16]!
+
+	mrs x1, spsr_el1
+	mrs x2, elr_el1
+	stp x1, x2, [x0, #-16]!
+
+	stp q0, q1, [x0, #-32]!
+	stp q2, q3, [x0, #-32]!
+	stp q4, q5, [x0, #-32]!
+	stp q6, q7, [x0, #-32]!
+	stp q8, q9, [x0, #-32]!
+	stp q10, q11, [x0, #-32]!
+	stp q12, q13, [x0, #-32]!
+	stp q14, q15, [x0, #-32]!
+	stp q16, q17, [x0, #-32]!
+	stp q18, q19, [x0, #-32]!
+	stp q20, q21, [x0, #-32]!
+	stp q22, q23, [x0, #-32]!
+	stp q24, q25, [x0, #-32]!
+	stp q26, q27, [x0, #-32]!
+	stp q28, q29, [x0, #-32]!
+	stp q30, q31, [x0, #-32]!
+    mrs x1, fpsr
+    mrs x2, fpcr
+    stp x1, x2, [x0, #-16]!
+ 	bl yss_switchContext
+    ldp x1, x2, [x0], #16
+	msr fpcr, x2
+	msr fpsr, x1
+	ldp q30, q31, [x0], #32
+	ldp q28, q29, [x0], #32
+	ldp q26, q27, [x0], #32
+	ldp q24, q25, [x0], #32
+	ldp q22, q23, [x0], #32
+	ldp q20, q21, [x0], #32
+	ldp q18, q19, [x0], #32
+	ldp q16, q17, [x0], #32
+	ldp q14, q15, [x0], #32
+	ldp q12, q13, [x0], #32
+	ldp q10, q11, [x0], #32
+	ldp q8, q9, [x0], #32
+	ldp q6, q7, [x0], #32
+	ldp q4, q5, [x0], #32
+	ldp q2, q3, [x0], #32
+	ldp q0, q1, [x0], #32
+
+	ldp x1, x2, [x0], #16
+	msr spsr_el1, x1
+	msr elr_el1, x2
+
+	ldr x30, [x0], #16
+	ldp x28, x29, [x0], #16	
+	ldp x26, x27, [x0], #16	
+	ldp x24, x25, [x0], #16	
+	ldp x22, x23, [x0], #16	
+	ldp x20, x21, [x0], #16	
+	ldp x18, x19, [x0], #16	
+	ldp x16, x17, [x0], #16
+	ldp x14, x15, [x0], #16
+	ldp x12, x13, [x0], #16
+	ldp x10, x11, [x0], #16
+	ldp x8, x9, [x0], #16
+	ldp x6, x7, [x0], #16
+	ldp x4, x5, [x0], #16
+	ldp x2, x3, [x0], #16
+	
+	str x30, [sp, #-16]!
+	mov x30, x0
+	ldp x0, x1, [x30], #16
+	msr sp_el0, x30
+	ldr x30, [sp], #16
+	eret
+
 
 /*************************** End of file ****************************/
