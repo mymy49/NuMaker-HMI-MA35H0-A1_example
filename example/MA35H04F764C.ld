@@ -17,9 +17,14 @@ SECTIONS
   __HEAPSIZE__ = 96 * 1024 * 1024;
   __SEGGER_RTL_vfprintf = __SEGGER_RTL_vfprintf_int_nwp;
   __SEGGER_RTL_vfscanf = __SEGGER_RTL_vfscanf_int;
-  __EL3_STACKSIZE__ = 2048;
-  __EL1_STACKSIZE__ = 2048;
-  __EL0_STACKSIZE__ = 2048;
+  __CORE0_EL3_STACKSIZE__ = 2 * 1024;
+  __CORE0_EL1_STACKSIZE__ = 10 * 1024;
+  __CORE0_EL0_STACKSIZE__ = 10 * 1024;
+
+  __CORE1_EL3_STACKSIZE__ = 2 * 1024;
+  __CORE1_EL1_STACKSIZE__ = 10 * 1024;
+  __CORE1_EL0_STACKSIZE__ = 10 * 1024;
+
 
   __vectors_load_start__ = __RAM1_segment_start__;
   .vectors __RAM1_segment_start__ : AT(__RAM1_segment_start__)
@@ -206,59 +211,110 @@ SECTIONS
 
   . = ASSERT(__heap_size__ <= __HEAPSIZE__ , "error: .heap section is larger than specified size");
 
-  __stack_load_start__ = ALIGN(__heap_end__ , 16);
-  .stack ALIGN(__heap_end__ , 16) (NOLOAD) : AT(ALIGN(__heap_end__ , 16))
+  __stack_core0_el3_load_start__ = ALIGN(__heap_end__ , 16);
+  .stack_core0_el3 ALIGN(__heap_end__ , 16) (NOLOAD) : AT(ALIGN(__heap_end__ , 16))
   {
-    __stack_start__ = .;
-    *(.stack .stack.*)
-    . = ALIGN(MAX(__stack_start__ + __EL3_STACKSIZE__ , .), 16);
+    __stack_core0_el3_start__ = .;
+    *(.stack_core0_el3 .stack_core0_el3.*)
+    . = ALIGN(MAX(__stack_core0_el3_start__ + __CORE0_EL3_STACKSIZE__ , .), 16);
   }
-  __stack_end__ = __stack_start__ + SIZEOF(.stack);
-  __stack_size__ = SIZEOF(.stack);
-  __stack_load_end__ = __stack_end__;
+  __stack_core0_el3_end__ = __stack_core0_el3_start__ + SIZEOF(.stack_core0_el3);
+  __stack_core0_el3_size__ = SIZEOF(.stack_core0_el3);
+  __stack_core0_el3_load_end__ = __stack_core0_el3_end__;
 
-  . = ASSERT(__stack_start__ == __stack_end__ || (__stack_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack is too large to fit in RAM1 memory segment");
+  . = ASSERT(__stack_core0_el3_start__ == __stack_core0_el3_end__ || (__stack_core0_el3_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack is too large to fit in RAM1 memory segment");
 
-  . = ASSERT(__EL3_STACKSIZE__  == ALIGN(__EL3_STACKSIZE__, 16), "error: .stack section size does not match alignment");
+  . = ASSERT(__CORE0_EL3_STACKSIZE__  == ALIGN(__CORE0_EL3_STACKSIZE__, 16), "error: .stack_core0_el3 section size does not match alignment");
 
-  . = ASSERT(__stack_size__ <= __EL3_STACKSIZE__ , "error: .stack section is larger than specified size");
+  . = ASSERT(__stack_core0_el3_size__ <= __CORE0_EL3_STACKSIZE__ , "error: .stack_core0_el3 section is larger than specified size");
 
-  __stack_el1_load_start__ = ALIGN(__stack_end__ , 16);
-  .stack_el1 ALIGN(__stack_end__ , 16) (NOLOAD) : AT(ALIGN(__stack_end__ , 16))
+  __stack_core0_el1_load_start__ = ALIGN(__stack_core0_el3_end__ , 16);
+  .stack_core0_el1 ALIGN(__stack_core0_el3_end__ , 16) (NOLOAD) : AT(ALIGN(__stack_core0_el3_end__ , 16))
   {
-    __stack_el1_start__ = .;
-    *(.stack_el1 .stack_el1.*)
-	. = ALIGN(MAX(__stack_el1_start__ + __EL1_STACKSIZE__ , .), 16);
+    __stack_core0_el1_start__ = .;
+    *(.stack_core0_el1 .stack_core0_el1.*)
+	. = ALIGN(MAX(__stack_core0_el1_start__ + __CORE0_EL1_STACKSIZE__ , .), 16);
   }
-  __stack_el1_end__ = __stack_el1_start__ + SIZEOF(.stack_el1);
-  __stack_el1_size__ = SIZEOF(.stack_el1);
-  __stack_el1_load_end__ = __stack_el1_end__;
+  __stack_core0_el1_end__ = __stack_core0_el1_start__ + SIZEOF(.stack_core0_el1);
+  __stack_core0_el1_size__ = SIZEOF(.stack_core0_el1);
+  __stack_core0_el1_load_end__ = __stack_core0_el1_end__;
 
-  . = ASSERT(__stack_el1_start__ == __stack_el1_end__ || (__stack_el1_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack_el1 is too large to fit in RAM1 memory segment");
+  . = ASSERT(__stack_core0_el1_start__ == __stack_core0_el1_end__ || (__stack_core0_el1_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack_core0_el1 is too large to fit in RAM1 memory segment");
 
-  . = ASSERT(__EL1_STACKSIZE__ == ALIGN(__EL1_STACKSIZE__, 16), "error: .stack_el1 section size does not match alignment");
+  . = ASSERT(__CORE0_EL1_STACKSIZE__ == ALIGN(__CORE0_EL1_STACKSIZE__, 16), "error: .stack_core0_el1 section size does not match alignment");
 
-  . = ASSERT(__stack_el1_size__ <= __EL1_STACKSIZE__ , "error: .stack_el1 section is larger than specified size");
+  . = ASSERT(__stack_core0_el1_size__ <= __CORE0_EL1_STACKSIZE__ , "error: .stack_core0_el1 section is larger than specified size");
 
-  __stack_el0_load_start__ = ALIGN(__stack_el1_end__ , 16);
-  .stack_el0 ALIGN(__stack_el1_end__ , 16) (NOLOAD) : AT(ALIGN(__stack_el1_end__ , 16))
+  __stack_core0_el0_load_start__ = ALIGN(__stack_core0_el1_end__ , 16);
+  .stack_core0_el0 ALIGN(__stack_core0_el1_end__ , 16) (NOLOAD) : AT(ALIGN(__stack_core0_el1_end__ , 16))
   {
-    __stack_el0_start__ = .;
-    *(.stack_el0 .stack_el0.*)
-	. = ALIGN(MAX(__stack_el0_start__ + __EL0_STACKSIZE__ , .), 16);
+    __stack_core0_el0_start__ = .;
+    *(.stack_core0_el0 .stack_core0_el0.*)
+	. = ALIGN(MAX(__stack_core0_el0_start__ + __CORE0_EL0_STACKSIZE__ , .), 16);
   }
-  __stack_el0_end__ = __stack_el0_start__ + SIZEOF(.stack_el0);
-  __stack_el0_size__ = SIZEOF(.stack_el0);
-  __stack_el0_load_end__ = __stack_el0_end__;
+  __stack_core0_el0_end__ = __stack_core0_el0_start__ + SIZEOF(.stack_core0_el0);
+  __stack_core0_el0_size__ = SIZEOF(.stack_core0_el0);
+  __stack_core0_el0_load_end__ = __stack_core0_el0_end__;
 
-  . = ASSERT(__stack_el0_start__ == __stack_el0_end__ || (__stack_el0_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack_el0 is too large to fit in RAM1 memory segment");
+  . = ASSERT(__stack_core0_el0_start__ == __stack_core0_el0_end__ || (__stack_core0_el0_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack_core0_el0 is too large to fit in RAM1 memory segment");
 
-  . = ASSERT(__EL0_STACKSIZE__ == ALIGN(__EL0_STACKSIZE__, 16), "error: .stack_el0 section size does not match alignment");
+  . = ASSERT(__CORE0_EL0_STACKSIZE__ == ALIGN(__CORE0_EL0_STACKSIZE__, 16), "error: .stack_core0_el0 section size does not match alignment");
 
-  . = ASSERT(__stack_el0_size__ <= __EL0_STACKSIZE__ , "error: .stack_el0 section is larger than specified size");
+  . = ASSERT(__stack_core0_el0_size__ <= __CORE0_EL0_STACKSIZE__ , "error: .stack_core0_el0 section is larger than specified size");
 
-  __tbss_load_start__ = ALIGN(__stack_el0_end__ , 4);
-  .tbss ALIGN(__stack_el0_end__ , 4) (NOLOAD) : AT(ALIGN(__stack_el1_end__ , 4))
+  __stack_core1_el3_load_start__ = ALIGN(__stack_core0_el0_load_end__ , 16);
+  .stack_core1_el3 ALIGN(__stack_core0_el0_load_end__ , 16) (NOLOAD) : AT(ALIGN(__stack_core0_el0_load_end__ , 16))
+  {
+    __stack_core1_el3_start__ = .;
+    *(.stack_core1_el3 .stack_core1_el3.*)
+    . = ALIGN(MAX(__stack_core1_el3_start__ + __CORE1_EL3_STACKSIZE__ , .), 16);
+  }
+  __stack_core1_el3_end__ = __stack_core1_el3_start__ + SIZEOF(.stack_core1_el3);
+  __stack_core1_el3_size__ = SIZEOF(.stack_core1_el3);
+  __stack_core1_el3_load_end__ = __stack_core1_el3_end__;
+
+  . = ASSERT(__stack_core1_el3_start__ == __stack_core1_el3_end__ || (__stack_core1_el3_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack is too large to fit in RAM1 memory segment");
+
+  . = ASSERT(__CORE1_EL3_STACKSIZE__  == ALIGN(__CORE1_EL3_STACKSIZE__, 16), "error: .stack_core1_el3 section size does not match alignment");
+
+  . = ASSERT(__stack_core1_el3_size__ <= __CORE1_EL3_STACKSIZE__ , "error: .stack_core1_el3 section is larger than specified size");
+
+  __stack_core1_el1_load_start__ = ALIGN(__stack_core1_el3_end__ , 16);
+  .stack_core1_el1 ALIGN(__stack_core1_el3_end__ , 16) (NOLOAD) : AT(ALIGN(__stack_core1_el3_end__ , 16))
+  {
+    __stack_core1_el1_start__ = .;
+    *(.stack_core1_el1 .stack_core1_el1.*)
+	. = ALIGN(MAX(__stack_core1_el1_start__ + __CORE1_EL1_STACKSIZE__ , .), 16);
+  }
+  __stack_core1_el1_end__ = __stack_core1_el1_start__ + SIZEOF(.stack_core1_el1);
+  __stack_core1_el1_size__ = SIZEOF(.stack_core1_el1);
+  __stack_core1_el1_load_end__ = __stack_core1_el1_end__;
+
+  . = ASSERT(__stack_core1_el1_start__ == __stack_core1_el1_end__ || (__stack_core1_el1_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack_core1_el1 is too large to fit in RAM1 memory segment");
+
+  . = ASSERT(__CORE1_EL1_STACKSIZE__ == ALIGN(__CORE1_EL1_STACKSIZE__, 16), "error: .stack_core1_el1 section size does not match alignment");
+
+  . = ASSERT(__stack_core1_el1_size__ <= __CORE1_EL1_STACKSIZE__ , "error: .stack_core1_el1 section is larger than specified size");
+
+  __stack_core1_el0_load_start__ = ALIGN(__stack_core1_el1_end__ , 16);
+  .stack_core1_el0 ALIGN(__stack_core1_el1_end__ , 16) (NOLOAD) : AT(ALIGN(__stack_core1_el1_end__ , 16))
+  {
+    __stack_core1_el0_start__ = .;
+    *(.stack_core1_el0 .stack_core1_el0.*)
+	. = ALIGN(MAX(__stack_core1_el0_start__ + __CORE1_EL0_STACKSIZE__ , .), 16);
+  }
+  __stack_core1_el0_end__ = __stack_core1_el0_start__ + SIZEOF(.stack_core1_el0);
+  __stack_core1_el0_size__ = SIZEOF(.stack_core1_el0);
+  __stack_core1_el0_load_end__ = __stack_core1_el0_end__;
+
+  . = ASSERT(__stack_core1_el0_start__ == __stack_core1_el0_end__ || (__stack_core1_el0_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__ , "error: .stack_core1_el0 is too large to fit in RAM1 memory segment");
+
+  . = ASSERT(__CORE1_EL0_STACKSIZE__ == ALIGN(__CORE1_EL0_STACKSIZE__, 16), "error: .stack_core1_el0 section size does not match alignment");
+
+  . = ASSERT(__stack_core1_el0_size__ <= __CORE1_EL0_STACKSIZE__ , "error: .stack_core1_el0 section is larger than specified size");
+
+  __tbss_load_start__ = ALIGN(__stack_core1_el0_end__ , 4);
+  .tbss ALIGN(__stack_core1_el0_end__ , 4) (NOLOAD) : AT(ALIGN(__stack_core1_el0_end__ , 4))
   {
     __tbss_start__ = .;
     *(.tbss .tbss.*)

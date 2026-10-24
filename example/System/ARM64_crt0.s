@@ -99,15 +99,21 @@
  * Function    : _start                                                      *
  * Description : Main entry point and startup code for C system.             *
  *****************************************************************************/
-  .type _start, function
+	.type _start, function
 _start:
 __start:
   
-  ldr x5, =__stack_end__
-  mov sp, x5
+	ldr x5, =__stack_core0_el3_end__
+	mov sp, x5
 
-  ldr x5, =__tbss_start__-0x10
-  msr tpidr_el0, x5
+	ldr x0, =__stack_core0_el1_end__
+	msr sp_el1, x0
+
+	ldr x0, =__stack_core0_el0_end__
+	msr sp_el0, x0
+
+	ldr x5, =__tbss_start__-0x10
+	msr tpidr_el0, x5
 
 #ifdef INITIALIZE_STACKS  
   mov r2, #0xCC 

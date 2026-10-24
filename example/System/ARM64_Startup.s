@@ -48,6 +48,27 @@ Purpose   : Generic startup and exception handlers for ARM64 devices.
 **********************************************************************
 */
 
+// ---------------------------------------------------------
+// SPSR_ELx (Saved Program Status Register) Bit Definitions
+// ---------------------------------------------------------
+
+// 1. 동작 모드 및 스택(Exception Level & SP Select) 정의 (M[4:0] 비트)
+// M[4] = 0 (AArch64 상태 실행)
+#define SPSR_MODE_EL0t      0x00    // EL0 Thread 모드 (비특권 유저 모드)
+#define SPSR_MODE_EL1t      0x04    // EL1 권한 + SP_EL0 스택 사용 (Flat RTOS 태스크용)
+#define SPSR_MODE_EL1h      0x05    // EL1 권한 + SP_EL1 스택 사용 (커널/핸들러용)
+#define SPSR_MODE_EL2t      0x08    // EL2 권한 + SP_EL0 스택 사용
+#define SPSR_MODE_EL2h      0x09    // EL2 권한 + SP_EL2 스택 사용
+#define SPSR_MODE_EL3t      0x0C    // EL3 권한 + SP_EL0 스택 사용
+#define SPSR_MODE_EL3h      0x0D    // EL3 권한 + SP_EL3 스택 사용
+
+// 2. 인터럽트 마스크(Mask) 비트 정의
+// 비트를 1로 셋(Set)하면 해당 예외를 무시(Mask)함
+#define SPSR_FIQ_MASK       (1 << 6)    // Bit 6: FIQ (Fast Interrupt) 마스크
+#define SPSR_IRQ_MASK       (1 << 7)    // Bit 7: IRQ (일반 인터럽트) 마스크
+#define SPSR_SERROR_MASK    (1 << 8)    // Bit 8: SError (System Error, 비동기 폴트) 마스크
+#define SPSR_DEBUG_MASK     (1 << 9)    // Bit 9: Debug Exception 마스크
+
 //
 // Mark the end of a function and calculate its size
 //
@@ -78,15 +99,17 @@ Purpose   : Generic startup and exception handlers for ARM64 devices.
 *    Generic bringup of a system.
 */
 
-  .arch armv8-a
+	.arch armv8-a
 
-  .global Debug_Start_Here
-  .global Reset_Handler
-  .global reset_handler
-  .global SystemInit
-  .type Reset_Handler, function
-  .equ reset_handler, Reset_Handler
-  .section .init, "ax"
+	.global Debug_Start_Here
+	.global Reset_Handler
+	.global reset_handler
+	.global SystemInit
+	.global SystemInit1
+	.global main1
+	.type Reset_Handler, function
+	.equ reset_handler, Reset_Handler
+	.section .init, "ax"
 
 Reset_Handler:
 	// MMU, D-cache, I-cache 끄기
@@ -97,7 +120,13 @@ Reset_Handler:
 	msr     sctlr_el3, x0
 	isb
 
-	// === 추가된 부분: SCR_EL3 및 CPTR_EL3 초기화 (하위 EL 설정) ===
+	// SMPEN 비트 설정 (하드웨어 캐시 일관성 및 코어 간 통신 활성화)
+	mrs     x0, S3_1_c15_c2_1
+	orr     x0, x0, #(1 << 6)
+	msr     S3_1_c15_c2_1, x0
+	isb
+
+	// SCR_EL3 및 CPTR_EL3 초기화 (하위 EL 설정) ===
 	mov     x0, #0
 	orr     x0, x0, #(1 << 11)  // ST 비트: 하위 EL에서 Secure Timer 접근 허용
 	orr     x0, x0, #(1 << 10)  // RW 비트: 하위 EL(EL1, EL0)을 64비트(AArch64) 상태로 실행 (가장 중요)
@@ -106,12 +135,27 @@ Reset_Handler:
 	mov     x0, #0              // CPTR_EL3의 모든 비트를 0으로 초기화
 	msr     cptr_el3, x0        // FPU(부동소수점) 명령어가 EL3로 트랩(예외)되는 것을 방지
 	isb
+	
+	// 벡터 설정
+	adr x0, _vectors
+	msr vbar_el3, x0
+	msr vbar_el1, x0
 
 	// I-cache, TLB 무효화
  	ic      iallu
 	tlbi    alle3
 	dsb     sy
 	isb
+
+	mov x0, #(0x3 << 20) // FPEN disables trapping to EL1.
+	msr cpacr_el1, x0
+
+	// Core 번호 확인
+	mrs     x1, mpidr_el1
+	and     x1, x1, #3
+	cbz     x1, 0f    
+	b       core1_init
+0:
 
 	// D-cache를 set/way 방식으로 무효화 (L1, L2)
 	// 이전 실행의 dirty 데이터는 버립니다(clean하지 않음).
@@ -154,36 +198,61 @@ Reset_Handler:
 	dsb     sy
 	isb
 	
-	// Core 번호 확인
-	mrs     x1, mpidr_el1
-	and     x1, x1, #3
-	cbz     x1, 7f    
-6:
-	wfi
-	b       6b
-7: 
-#if 0
-	b .
-
-Debug_Start_Here:
-#endif
 	// SystemInit Call
 	bl SystemInit
 
-	ldr x0, =__stack_el1_end__
+	b _start
+	
+core1_init :
+	// L1 D-cache만 set/way 방식으로 무효화 (Core 1 전용)
+	// csselr_el1 = 0 (Level 1 Data cache 선택)
+	mov     x10, #0
+	msr     csselr_el1, x10
+	isb
+	mrs     x1, ccsidr_el1
+	and     x2, x1, #7
+	add     x2, x2, #4               // x2 = log2(line bytes)
+	ubfx    x4, x1, #3, #10          // x4 = max way
+	clz     w5, w4                   // w5 = way 필드 bit shift 위치
+	ubfx    x7, x1, #13, #15         // x7 = max set
+2:                                   // Set 루프
+	mov     x9, x4                   // x9 = way 카운터 초기화
+3:                                   // Way 루프
+	lsl     x6, x9, x5               // way 번호 시프트
+	lsl     x11, x7, x2              // set 번호 시프트 (Level이 0이므로 x10을 OR할 필요 없음)
+	orr     x11, x11, x6             // set + way 결합
+	dc      isw, x11                 // 해당 Set/Way 캐시 라인 무효화
+	subs    x9, x9, #1
+	b.ge    3b
+	subs    x7, x7, #1
+	b.ge    2b
+	dsb     sy
+	isb
+
+	ldr x5, =__stack_core1_el3_end__
+	mov sp, x5
+
+	ldr x0, =__stack_core1_el1_end__
 	msr sp_el1, x0
 
-	ldr x0, =__stack_el0_end__
+	ldr x0, =__stack_core1_el0_end__
 	msr sp_el0, x0
 
-	adr x0, _vectors
-	msr vbar_el3, x0
-	msr vbar_el1, x0
+	ldr x5, =__tbss_start__-0x10
+	msr tpidr_el0, x5
 
-	mov x0, #(0x3 << 20) // FPEN disables trapping to EL1.
-	msr cpacr_el1, x0
+	bl SystemInit1
 
-	b _start
+	ldr x0, =(SPSR_MODE_EL1t | SPSR_IRQ_MASK | SPSR_FIQ_MASK)
+	msr spsr_el3, x0
+
+	mov x0, #0
+	mov x1, #0
+
+	ldr x2, =main1
+	msr elr_el3, x2
+	eret
+
 END_FUNC Reset_Handler
 
 .weak synchronousExceptionHandler
