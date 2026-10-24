@@ -7,44 +7,63 @@
 
 #include <stdio.h>
 #include <yss.h>
+#include <bsp.h>
 #include <util/runtime.h>
 
-triggerId_t gId;
-
-void thread_test1()
-{
-	while(1)
-	{
-		if(runtime::getMsec() > 5000)
-			return;
-	}
-}
-
-void thread_test2()
-{
-	while(1)
-	{
-		thread::delay(100);
-		trigger::run(gId);
-	}
-}
-
-void trigger_test()
-{
-	printf("%d\r", (uint32_t)runtime::getMsec());
-}
+void thread_blinkRed();
+void thread_blinkGreen();
+void thread_blinkYellow();
 
 int main(void) 
 {
 	initializeYss();
 
-	gId = trigger::add(trigger_test, 10 * 1024);
+	initializeBoard();
 
-	thread::add(thread_test1, 10 * 1024);
-	thread::add(thread_test2, 10 * 1024);
+	thread::add(thread_blinkRed, 4 * 1024);
+	thread::add(thread_blinkGreen, 4 * 1024);
+	thread::add(thread_blinkYellow, 4 * 1024);
 
     while (1)
     {
 		thread::yield();
     }
 }
+
+void thread_blinkRed()
+{
+	while(1)
+	{
+		led::setRed(true);
+		thread::delay(500);
+
+		led::setRed(false);
+		thread::delay(500);
+	}
+}
+
+void thread_blinkGreen()
+{
+	while(1)
+	{
+		led::setGreen(true);
+		thread::delay(250);
+
+		led::setGreen(false);
+		thread::delay(250);
+	}
+}
+
+void thread_blinkYellow()
+{
+	while(1)
+	{
+		led::setYellow(true);
+		thread::delay(125);
+
+		led::setYellow(false);
+		thread::delay(125);
+	}
+}
+
+
