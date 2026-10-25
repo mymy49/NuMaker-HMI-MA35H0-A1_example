@@ -56,12 +56,13 @@
       gcc_entry_point="Reset_Handler"
       link_linker_script_file="$(ProjectDir)/../yss/linkerScript/MA35H04F764C.ld"
       link_use_linker_script_file="Yes"
+      linker_output_format="bin"
       linker_section_placement_file="$(ProjectDir)/../common/sram_placement_one_stack.xml"
       linker_section_placements_segments="FLASH1 RX 0x00000000 0x00100000;RAM1 RWX 0x20000000 0x00010000"
       macros="Target=Cortex-A35"
       project_directory=""
       project_type="Executable" />
-    <configuration Name="Debug" link_use_linker_script_file="Yes" />
+    <configuration Name="Debug" />
     <folder Name="App Source" exclude="" filter="" path="App" recurse="Yes" />
     <folder
       Name="Common Source"
