@@ -19,7 +19,9 @@
 
 // ####################### 스케줄러 설정 #######################
 // runtime 함수를 지원할 TIMER 장치 설정 (RUNTIME_TIMER0, 1, 2, 3)
-#define YSS_RUNTIME_TIMER	RUNTIME_TIMER1
+#define YSS_RUNTIME_TIMER	RUNTIME_TIMER0
+
+#define YSS_DELAY_TIMER		RUNTIME_TIMER1
 
 // 쓰레드당 할당 받는 Systick Clock의 수
 #define THREAD_GIVEN_CLOCK	1000000
@@ -52,6 +54,9 @@
 
 // EADC 활성화
 #define EADC_ENABLE			false
+
+// EMAC 활성화
+#define EMAC0_ENABLE		true
 
 // I2C 활성화
 #define I2C0_ENABLE			false
