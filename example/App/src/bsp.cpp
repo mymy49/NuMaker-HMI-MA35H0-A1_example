@@ -30,8 +30,8 @@ void initializeBoard(void)
 	Ethernet::config_t eth0Config = 
 	{
 		{0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF},	// uint8_t macAddress[6];
-		8,										//uint16_t rxDescriptorCount;
-		8,										//uint16_t txDescriptorCount;
+		10 * 1024,								//uint16_t rxDescriptorCount;
+		10 * 1024,								//uint16_t txDescriptorCount;
 	};
 	
 	emac0.lock();
