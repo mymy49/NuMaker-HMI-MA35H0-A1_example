@@ -35,7 +35,7 @@
     linker_printf_width_precision_supported="No" />
   <project Name="example">
     <configuration
-      JLinkScriptFileName="$(ProjectDir)/../common/MA35.JLinkScript"
+      JLinkScriptFileName="$(ProjectDir)/../../common/MA35.JLinkScript"
       LIBRARY_IO_TYPE="SEMIHOST (host-formatted)"
       Name="Common"
       Target="Cortex-A35"
@@ -48,16 +48,16 @@
       arm_target_device_name="Cortex-A35"
       arm_target_interface_type="JTAG"
       c_preprocessor_definitions="__MA35H0_FAMILY;__MA35H04F764C__;__SEGGER_LINKER;__aarch64__"
-      c_user_include_directories=".;$(ProjectDir)/../yss/inc;$(ProjectDir)/../CMSIS/MA35H0/Include;$(ProjectDir)/../CMSIS/Arch/Core_A/Include;$(ProjectDir)/App/inc;$(ProjectDir)/../common"
-      debug_register_definition_file="$(ProjectDir)/../common/MA35H0_Registers.xml"
+      c_user_include_directories=".;$(ProjectDir)/../../yss/inc;$(ProjectDir)/../../CMSIS/MA35H0/Include;$(ProjectDir)/../../CMSIS/Arch/Core_A/Include;$(ProjectDir)/App/inc;$(ProjectDir)/../../common"
+      debug_register_definition_file="$(ProjectDir)/../../common/MA35H0_Registers.xml"
       debug_stack_pointer_start="__stack_end__"
       debug_target_connection="J-Link"
       gcc_debugging_level="Level 3"
       gcc_entry_point="Reset_Handler"
-      link_linker_script_file="$(ProjectDir)/../yss/linkerScript/MA35H04F764C.ld"
+      link_linker_script_file="$(ProjectDir)/../../yss/linkerScript/MA35H04F764C.ld"
       link_use_linker_script_file="Yes"
       linker_output_format="bin"
-      linker_section_placement_file="$(ProjectDir)/../common/sram_placement_one_stack.xml"
+      linker_section_placement_file="$(ProjectDir)/../../common/sram_placement_one_stack.xml"
       linker_section_placements_segments="FLASH1 RX 0x00000000 0x00100000;RAM1 RWX 0x20000000 0x00010000"
       macros="Target=Cortex-A35"
       project_directory=""
@@ -68,23 +68,20 @@
       Name="Common Source"
       exclude=""
       filter=""
-      path="../common"
+      path="../../common"
       recurse="Yes" />
     <folder
       Name="Device Header"
       exclude=""
       filter=""
-      path="../CMSIS/MA35H0/Include"
+      path="../../CMSIS/MA35H0/Include"
       recurse="Yes" />
-    <folder Name="Setup">
-      <file file_name="$(ProjectDir)/../common/sram_placement_one_stack.xml" />
-    </folder>
+    <folder Name="Setup" />
     <folder
       Name="yss Source"
       exclude=""
       filter=""
-      path="../yss"
+      path="../../yss"
       recurse="Yes" />
-    <file file_name="../common/MA35.JLinkScript" />
   </project>
 </solution>
